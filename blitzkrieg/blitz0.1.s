@@ -4,7 +4,7 @@
 init:
 		sti			r1, %:alive, %1
 		sti			r1, %:copy, %1
-		ld			%0, r16
+		ld			%4294967296, r16
 		fork		%:copy
 
 alive:
