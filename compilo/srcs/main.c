@@ -80,8 +80,8 @@ static void	print_end_comment(char *file_name, int ret, int opt)
 		ft_putstr("Writing output program to ");
 	else
 		ft_putstr("And error occured during the writing of ");
-	while (*file_name && *file_name + 1)
-		ft_putchar(*file_name);
+	while (*file_name && *(file_name + 1))
+		ft_putchar(*(file_name++));
 	ft_putendl("cor");
 }
 
