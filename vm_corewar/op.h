@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 17:06:30 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/11 17:30:21 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
+
+# include "../libft/libft.h"
 
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -59,6 +61,13 @@ typedef char		t_arg_type;
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
+
+
+typedef struct		s_env
+{
+	int		i;
+	int		dump;
+}					t_env;
 
 typedef struct		s_process
 {
