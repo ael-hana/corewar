@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 17:30:21 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/11 18:58:03 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 */
 
 # include "../libft/libft.h"
+
+# define ERR_PARAM "./corewar [-dump nbr_cycles] [[-n number] champion.cor]..."
 
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -62,20 +64,12 @@ typedef char		t_arg_type;
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
 
-
-typedef struct		s_env
-{
-	int		i;
-	int		dump;
-}					t_env;
-
 typedef struct		s_process
 {
 	int				carry;
 	int				reg[16];
 	int				i;
 	unsigned char	*ptr;
-	s_process		*next;
 }					t_process;
 
 typedef struct		s_header
@@ -86,6 +80,14 @@ typedef struct		s_header
 	char			comment[COMMENT_LENGTH + 1];
 	t_process		*list_process;
 }					t_header;
+
+typedef struct		s_env
+{
+	int			i;
+	int			dump;
+	int			nb_players;
+	t_list		*player_list;
+}					t_env;
 
 typedef struct		s_op
 {
@@ -98,5 +100,10 @@ typedef struct		s_op
 	int		encod; //byte encodage
 	int		index; //index = 2 sans = 4
 }					t_op;
+
+void	print_error(char *str);
+int		str_is_digit(char *str);
+int		parse_flags(int ac, char **av, t_env *data);
+int		parse_players(int ac, char **av, t_env *data);
 
 #endif
