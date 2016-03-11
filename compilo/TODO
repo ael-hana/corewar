@@ -1,2 +1,2 @@
-check_instru.c : continue recursive check_args
+change ft_strlen
 check dans compile si tous les labels appeles existent vraiment

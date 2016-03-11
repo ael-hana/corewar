@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 15:10:53 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/11 17:40:55 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_op
 	int		cycles_nb;
 	char	*comment;
 	int		code_byte;
-	int		end2;
+	int		is_index;
 }					t_op;
 
 #endif
