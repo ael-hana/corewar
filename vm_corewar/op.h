@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 18:58:03 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/11 19:59:25 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
+# include "../libft/libft.h"
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 # include "../libft/libft.h"
 
@@ -63,6 +69,7 @@ typedef char		t_arg_type;
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
+# define READ_SIZE			42
 
 typedef struct		s_process
 {
@@ -77,6 +84,7 @@ typedef struct		s_header
 	unsigned int	magic;
 	char			prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int	prog_size;
+	unsigned char	*inst;
 	char			comment[COMMENT_LENGTH + 1];
 	t_process		*list_process;
 }					t_header;
