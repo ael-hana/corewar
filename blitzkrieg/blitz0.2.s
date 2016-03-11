@@ -17,6 +17,9 @@ alive:
 defense:
 		live		%1
 		fork		%:defhigh
+		ld			%42, r2
+		ld			%34, r3
+		fork		%:begin
 
 deflow:
 		live		%1
@@ -58,5 +61,6 @@ defhigh:
 
 begin:
 		live		%1
+		st			r2, r3
 
 end:
