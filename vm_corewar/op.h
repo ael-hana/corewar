@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 19:57:30 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/12 18:46:29 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+#include <stdio.h>
 
 # include "../libft/libft.h"
 
@@ -82,7 +83,7 @@ typedef struct		s_process
 	int				reg[16];
 	int				i;
 	unsigned char	*ptr;
-	s_process		*next;
+	struct s_process	*next;
 }					t_process;
 
 typedef struct		s_header
@@ -107,4 +108,7 @@ typedef struct		s_op
 	int		index; //index = 2 sans = 4
 }					t_op;
 
+t_header			*ft_parssing(char *path);
+void				error_msg(char *str);
+t_header			*check_buf(unsigned char *str, int len);
 #endif
