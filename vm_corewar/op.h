@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/11 19:59:25 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 18:36:44 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 # include "../libft/libft.h"
 
@@ -91,10 +92,11 @@ typedef struct		s_header
 
 typedef struct		s_env
 {
-	int			i;
-	int			dump;
-	int			nb_players;
-	t_list		*player_list;
+	int				i;
+	int				dump;
+	int				nb_players;
+	t_list			*player_list;
+	unsigned char	*arena;
 }					t_env;
 
 typedef struct		s_op
@@ -113,5 +115,8 @@ void	print_error(char *str);
 int		str_is_digit(char *str);
 int		parse_flags(int ac, char **av, t_env *data);
 int		parse_players(int ac, char **av, t_env *data);
+void	create_arena(t_env *data);
+void	print_arena(unsigned char *arena);
+void	place_players(t_env *data);
 
 #endif

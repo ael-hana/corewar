@@ -6,17 +6,11 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/11 19:12:04 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:31:59 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
-
-t_header	*create_player(char *filename)
-{
-
-	return 
-}
 
 int		get_player_number(int ac, char **av, t_env *data)
 {
@@ -48,4 +42,5 @@ int		parse_players(int ac, char **av, t_env *data)
 		data->nb_players++;
 		data->i++;
 	}
+	return (1);
 }
