@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/12 18:36:44 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 19:05:47 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
+#include <stdio.h>
 
 # include "../libft/libft.h"
 
@@ -78,6 +78,7 @@ typedef struct		s_process
 	int				reg[16];
 	int				i;
 	unsigned char	*ptr;
+	struct s_process	*next;
 }					t_process;
 
 typedef struct		s_header
@@ -111,12 +112,19 @@ typedef struct		s_op
 	int		index; //index = 2 sans = 4
 }					t_op;
 
-void	print_error(char *str);
-int		str_is_digit(char *str);
-int		parse_flags(int ac, char **av, t_env *data);
-int		parse_players(int ac, char **av, t_env *data);
-void	create_arena(t_env *data);
-void	print_arena(unsigned char *arena);
-void	place_players(t_env *data);
+void				print_error(char *str);
+int					str_is_digit(char *str);
+int					parse_flags(int ac, char **av, t_env *data);
+int					parse_players(int ac, char **av, t_env *data);
+void				create_arena(t_env *data);
+void				print_arena(unsigned char *arena);
+void				place_players(t_env *data);
+t_header			*ft_parssing(char *path);
+void				error_msg(char *str);
+t_header			*check_buf(unsigned char *str, int len);
+void				print_error(char *str);
+int					str_is_digit(char *str);
+int					parse_flags(int ac, char **av, t_env *data);
+int					parse_players(int ac, char **av, t_env *data);
 
 #endif
