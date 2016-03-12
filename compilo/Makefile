@@ -6,16 +6,19 @@
 #    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/14 15:29:40 by tle-meur          #+#    #+#              #
-#    Updated: 2016/03/10 20:44:57 by tle-meur         ###   ########.fr        #
+#    Updated: 2016/03/11 18:53:18 by tle-meur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	./asm
 
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-g -Wall -Wextra -Werror
 
-SRCS	=	srcs/op.c srcs/main.c srcs/compute.c srcs/utilities.c \
-			srcs/read_file.c srcs/check_instru.c srcs/lst_funcs.c \
+SRCS	=	srcs/op.c srcs/main.c srcs/compute.c srcs/lst_funcs.c \
+			srcs/utilities.c \
+			srcs/checks/read_file.c srcs/checks/check_instru.c \
+			srcs/checks/check_arg.c \
+			srcs/fill/compilo.c
 
 OBJS	=	$(SRCS:.c=.o)
 

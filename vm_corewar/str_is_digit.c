@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_is_digit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/12 18:58:21 by ael-hana         ###   ########.fr       */
+/*   Created: 2016/03/11 18:12:25 by ecousine          #+#    #+#             */
+/*   Updated: 2016/03/11 18:28:48 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-void	init_data(t_env *data)
+int		str_is_digit(char *str)
 {
-	data->i = 1;
-	data->nb_players = 0;
-	data->player_list = NULL;
-}
-
-int		main(int ac, char **av)
-{
-	t_env		data;
-
-	init_data(&data);
-	parse_flags(ac, av, &data);
-	init_data(&data);
-	parse_flags(ac, av, &data);
-	parse_players(ac, av, &data);
-	return (0);
+	while (*str)
+		if (ft_isdigit(*str++) == 0)
+			return (0);
+	return (1);
 }

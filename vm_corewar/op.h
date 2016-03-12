@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/12 18:46:29 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/12 18:57:15 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 #include <stdio.h>
 
 # include "../libft/libft.h"
+
+# define ERR_PARAM "./corewar [-dump nbr_cycles] [[-n number] champion.cor]..."
 
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -70,13 +72,6 @@ typedef char		t_arg_type;
 # define COREWAR_EXEC_MAGIC	0xea83f3
 # define READ_SIZE			42
 
-
-typedef struct		s_env
-{
-	int		i;
-	int		dump;
-}					t_env;
-
 typedef struct		s_process
 {
 	int				carry;
@@ -96,6 +91,14 @@ typedef struct		s_header
 	t_process		*list_process;
 }					t_header;
 
+typedef struct		s_env
+{
+	int			i;
+	int			dump;
+	int			nb_players;
+	t_list		*player_list;
+}					t_env;
+
 typedef struct		s_op
 {
 	char	*instr_name;
@@ -111,4 +114,9 @@ typedef struct		s_op
 t_header			*ft_parssing(char *path);
 void				error_msg(char *str);
 t_header			*check_buf(unsigned char *str, int len);
+void				print_error(char *str);
+int					str_is_digit(char *str);
+int					parse_flags(int ac, char **av, t_env *data);
+int					parse_players(int ac, char **av, t_env *data);
+
 #endif

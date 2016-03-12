@@ -1,41 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_flags.c                                      :+:      :+:    :+:   */
+/*   parse_players.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/11 17:20:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/11 19:59:14 by ecousine         ###   ########.fr       */
+/*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
+/*   Updated: 2016/03/11 19:12:04 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-int		get_dump(int ac, char **av, t_env *data)
+t_header	*create_player(char *filename)
 {
+
+	return 
+}
+
+int		get_player_number(int ac, char **av, t_env *data)
+{
+	int		n;
+
 	if (data->i + 1 < ac && str_is_digit(av[data->i + 1]) &&
-		(data->dump = ft_atoi(av[data->i + 1]) > 0))
-	{
-		data->i++;
-		return (1);
-	}
+			(n = ft_atoi(av[data->i + 1])) > 0)
+		return (n);
 	else
 		print_error(ERR_PARAM);
 	return (-1);
 }
 
-int		parse_flags(int ac, char **av, t_env *data)
+int		parse_players(int ac, char **av, t_env *data)
 {
+	int			n;
+	t_header	*player;
+
 	while (data->i < ac)
 	{
-		if (ft_strcmp(av[data->i], "-dump") == 0)
-			get_dump(ac, av, data);
-		else if (ft_strcmp("-n", av[data->i]))
-			break;
-		else if (av[data->i][0] == '-')
-			print_error(ERR_PARAM);
+		n = 0;
+		if (ft_strcmp(av[data->i], "-n") == 0)
+		{
+			n = get_player_number(ac, av, data);
+			data->i++;
+		}
+		player = create_player(av[data->i]);
+		ft_lstadd(&data->player_list, ft_lstnew(player, sizeof(t_header *)));
+		data->nb_players++;
 		data->i++;
 	}
-	return (1);
 }
