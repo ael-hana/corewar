@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/12 19:06:14 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 21:32:25 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int		main(int ac, char **av)
 
 	init_data(&data);
 	parse_flags(ac, av, &data);
-//	parse_players(ac, av, &data);
-	create_arena(&data);
-//	place_players(&data);
-	print_arena(data.arena);
 	parse_players(ac, av, &data);
+	create_arena(&data);
+	place_players(&data);
+	print_arena(data.arena);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:14:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/12 18:48:58 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/12 21:30:40 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned char		*mem_realloc(unsigned char *str, unsigned char *tab,
 	return (tmp);
 }
 
-t_header			*ft_parssing(char *path)
+t_header			*create_player(char *path)
 {
 	int				fd;
 	int				i;

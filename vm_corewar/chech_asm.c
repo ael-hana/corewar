@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:42:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/12 18:46:28 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/12 21:24:30 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_header			*check_buf(unsigned char *str, int len)
 	check_comment(str, ptr->comment, len);
 	if ((len - 2192) != ptr->prog_size)
 		error_msg("ERROR : PROG SIZE\n");
+	ptr->inst = malloc(sizeof(unsigned char) * ptr->prog_size);
 	ft_memcpy(ptr->inst, str + 2192, ptr->prog_size);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/12 19:05:47 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 20:40:07 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int					parse_players(int ac, char **av, t_env *data);
 void				create_arena(t_env *data);
 void				print_arena(unsigned char *arena);
 void				place_players(t_env *data);
-t_header			*ft_parssing(char *path);
+t_header			*create_player(char *path);
 void				error_msg(char *str);
 t_header			*check_buf(unsigned char *str, int len);
 void				print_error(char *str);
