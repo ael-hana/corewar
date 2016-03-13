@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/12 20:40:07 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 22:00:50 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # include "../libft/libft.h"
 
-# define ERR_PARAM "./corewar [-dump nbr_cycles] [[-n number] champion.cor]..."
+# define ERR_PARAM "./corewar [-dump nbr_cycles] [[-n number] champion.cor]..\n"
 
 # define IND_SIZE			2
 # define REG_SIZE			4

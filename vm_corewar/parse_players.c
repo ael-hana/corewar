@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/12 21:16:07 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 22:01:12 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		parse_players(int ac, char **av, t_env *data)
 		player = data->player_list->content;
 		data->nb_players++;
 		data->i++;
+		if (data->nb_players > 4)
+			print_error(ERR_PARAM);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:33:20 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/12 21:32:20 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/12 21:50:52 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	place_players(t_env *data)
 	while (player)
 	{
 		place_player(data->arena, i, (t_header *)player->content);
-		i = MEM_SIZE / data->nb_players;
+		i += MEM_SIZE / data->nb_players;
 		player = player->next;
 	}
 }
