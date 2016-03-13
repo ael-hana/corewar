@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/12 22:00:50 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/13 18:01:19 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,22 @@ typedef struct		s_process
 {
 	int				carry;
 	int				reg[16];
-	int				i;
-	unsigned char	*ptr;
-	struct s_process	*next;
+	int				position;
+	int				alive;
+	int				last_alive;
 }					t_process;
 
 typedef struct		s_header
 {
 	unsigned int	magic;
+	int				n;
 	char			prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int	prog_size;
 	unsigned char	*inst;
 	char			comment[COMMENT_LENGTH + 1];
-	t_process		*list_process;
+	t_list			*process_list;
+	int				alive;
+	int				last_alive;
 }					t_header;
 
 typedef struct		s_env
@@ -97,34 +100,39 @@ typedef struct		s_env
 	int				dump;
 	int				nb_players;
 	t_list			*player_list;
+	int				total_live;
+	int				live_last_verif;
 	unsigned char	*arena;
+	int				cycle;
 }					t_env;
 
 typedef struct		s_op
 {
-	char	*instr_name;
-	int		params_nb;
-	int		params_type[3];
-	int		opcode;
-	int		cycles_nb;
-	char	*comment;
-	int		encod; //byte encodage
-	int		index; //index = 2 sans = 4
+	char			*instr_name;
+	int				params_nb;
+	int				params_type[3];
+	int				opcode;
+	int				cycles_nb;
+	char			*comment;
+	int				encod; //byte encodage
+	int				index; //index = 2 sans = 4
 }					t_op;
 
-void				print_error(char *str);
-int					str_is_digit(char *str);
-int					parse_flags(int ac, char **av, t_env *data);
-int					parse_players(int ac, char **av, t_env *data);
-void				create_arena(t_env *data);
-void				print_arena(unsigned char *arena);
-void				place_players(t_env *data);
-t_header			*create_player(char *path);
-void				error_msg(char *str);
-t_header			*check_buf(unsigned char *str, int len);
-void				print_error(char *str);
-int					str_is_digit(char *str);
-int					parse_flags(int ac, char **av, t_env *data);
-int					parse_players(int ac, char **av, t_env *data);
+t_process		*create_process(t_process *father_process, int n, int position);
+void			start_game(t_env *data);
+void			print_error(char *str);
+int				str_is_digit(char *str);
+int				parse_flags(int ac, char **av, t_env *data);
+int				parse_players(int ac, char **av, t_env *data);
+void			create_arena(t_env *data);
+void			print_arena(unsigned char *arena);
+void			place_players(t_env *data);
+t_header		*create_player(char *path);
+void			error_msg(char *str);
+t_header		*check_buf(unsigned char *str, int len);
+void			print_error(char *str);
+int				str_is_digit(char *str);
+int				parse_flags(int ac, char **av, t_env *data);
+int				parse_players(int ac, char **av, t_env *data);
 
 #endif
