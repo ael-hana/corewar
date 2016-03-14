@@ -33,43 +33,8 @@ static void	write_header(t_env *e, int fd)
 	write(fd, &empty, 4);
 }
 
-static void	write_code_byte(t_list *tmp, int fd)
-{
-	int	i;
-	int	nb;
-
-	i = 6;
-	nb = 0;
-	while (tmp)
-	{
-		if (((t_arg *)tmp->content)->arg_type & T_LAB)
-			nb += ((((t_arg *)tmp->content)->arg_type - T_LAB) << i);
-		else
-			nb += (((t_arg *)tmp->content)->arg_type << i);
-		tmp = tmp->next;
-		i -= 2;
-	}
-	write(fd, &nb, 1);
-}
-
-static void	write_direct(t_env *e, t_instr *i, t_arg *a, int fd)
-{
-	int		nb;
-	t_list	*tmp;
-
-	if (!(a->arg_type & T_LAB))
-		nb = ft_atoi(a->arg_value);
-	else
-	{
-		tmp = ft_lstfind(e->labels, a->arg_value, sizeof(t_label), &my_lstcmp);
-		nb = ((t_label *)tmp->content)->byte - i->byte;
-	}
-	write_big_endian(nb, (g_op_tab[i->id_instr].is_index) ? 2 : 4, fd, 0);
-}
-
 void		write_file(t_env *e, int fd)
 {
-	int		nb;
 	t_arg	*a;
 	t_instr	*i;
 	t_list	*tmp1;
@@ -82,15 +47,16 @@ void		write_file(t_env *e, int fd)
 	{
 		write(fd, &g_op_tab[i->id_instr].opcode, 1);
 		if ((tmp2 = i->args) && g_op_tab[i->id_instr].code_byte)
-			write_code_byte(i->args, fd);
+			write(fd, &i->code_byte, 1);
 		while (tmp2 && (a = (t_arg *)tmp2->content)
 			&& ((tmp2 = tmp2->next) || 1))
 		{
-			if ((a->arg_type == REG_CODE || a->arg_type == IND_CODE)
-				&& ((nb = ft_atoi(a->arg_value)) || 1))
-				write_big_endian(nb, (a->arg_type == REG_CODE) ? 1 : 2, fd, 0);
+			if (a->arg_type == REG_CODE || a->arg_type == IND_CODE)
+				write_big_endian(a->arg_val,
+				(a->arg_type == REG_CODE) ? 1 : 2, fd, 0);
 			else
-				write_direct(e, i, a, fd);
+				write_big_endian(a->arg_val,
+				(g_op_tab[i->id_instr].is_index) ? 2 : 4, fd, 0);
 		}
 	}
 }
