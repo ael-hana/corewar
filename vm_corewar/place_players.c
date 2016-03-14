@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:33:20 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/13 17:45:07 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:11:20 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	place_players(t_env *data)
 	{
 		place_player(data->arena, i, (t_header *)player->content);
 		((t_process *)(((t_header *)player->content)->process_list->content))->
-			position = MEM_SIZE / data->nb_players;;
+			position = i;
 		i += MEM_SIZE / data->nb_players;
 		player = player->next;
 	}
