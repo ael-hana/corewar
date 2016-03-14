@@ -22,22 +22,14 @@ void	my_arg_del(void *content, size_t size)
 	free(content);
 }
 
-void	my_label_del(void *content, size_t size)
+void	my_instrlabel_del(void *content, size_t size)
 {
-	(void)size;
 	if (!content)
 		return ;
-	if (((t_label *)content)->name)
+	if (size == sizeof(t_instr))
+		ft_lstdel(&((t_instr *)content)->args, &my_arg_del);
+	else if (size == sizeof(t_label) && ((t_label *)content)->name)
 		free(((t_label *)content)->name);
-	free(content);
-}
-
-void	my_instr_del(void *content, size_t size)
-{
-	(void)size;
-	if (!content)
-		return ;
-	ft_lstdel(&((t_instr *)content)->args, &my_arg_del);
 	free(content);
 }
 
@@ -45,4 +37,10 @@ int		my_lstcmp(const t_list *cmp, const void *content, size_t size)
 {
 	(void)size;
 	return (!ft_strcmp(content, ((t_label *)cmp->content)->name));
+}
+
+int		my_lstmerge(const t_list *label, const t_list *instr)
+{
+	return (((t_label *)label->content)->byte
+		- ((t_instr *)instr->content)->byte);
 }

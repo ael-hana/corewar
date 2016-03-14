@@ -20,6 +20,7 @@ typedef struct	s_arg
 {
 	int		arg_type;
 	char	*arg_value;
+	int		arg_val;
 }				t_arg;
 
 typedef struct	s_label
@@ -32,6 +33,7 @@ typedef struct	s_instr
 {
 	int		byte;
 	int		id_instr;
+	int		code_byte;
 	t_list	*args;
 }				t_instr;
 
@@ -50,14 +52,14 @@ int				my_compute(char *file_name, int opt);
 char			*jump_whitespaces(char *s);
 int				is_in_buf(char c, char *buf);
 char			*jump_word(char *s, char *ref);
-void			write_big_endian(long nb, int size, int fd);
+void			write_big_endian(long nb, int size, int fd, int nbr);
 
 /*
 **	lst_funcs.c
 */
 void			my_arg_del(void *content, size_t size);
-void			my_label_del(void *content, size_t size);
-void			my_instr_del(void *content, size_t size);
+void			my_instrlabel_del(void *content, size_t size);
+int				my_lstmerge(const t_list *label, const t_list *instr);
 int				my_lstcmp(const t_list *cmp, const void *content, size_t size);
 
 /*

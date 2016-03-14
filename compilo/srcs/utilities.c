@@ -39,7 +39,7 @@ int		is_in_buf(char c, char *buf)
 	return (0);
 }
 
-void	write_big_endian(long nb, int size, int fd)
+void	write_big_endian(long nb, int size, int fd, int nbr)
 {
 	unsigned int	tmp;
 
@@ -47,15 +47,15 @@ void	write_big_endian(long nb, int size, int fd)
 	if (size == 4)
 	{
 		tmp = nb >> 24;
-		write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%02hhx ", tmp) : write(fd, &tmp, 1);
 		tmp = (nb - (tmp << 24)) >> 16;
-		write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%02hhx ", tmp) : write(fd, &tmp, 1);
 	}
 	if (size >= 2)
 	{
 		tmp = (nb - (tmp << 16)) >> 8;
-		write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%02hhx ", tmp) : write(fd, &tmp, 1);
 	}
 	tmp = nb - (tmp << 8);
-	write(fd, &tmp, 1);
+	(nbr) ? ft_printf("%02hhx ", tmp) : write(fd, &tmp, 1);
 }

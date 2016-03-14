@@ -16,8 +16,8 @@
 
 static int	free_and_quit(t_env *e, int ret)
 {
-	ft_lstdel(&e->labels, &my_label_del);
-	ft_lstdel(&e->instrs, &my_instr_del);
+	ft_lstdel(&e->labels, &my_instrlabel_del);
+	ft_lstdel(&e->instrs, &my_instrlabel_del);
 	free(e);
 	return (ret);
 }

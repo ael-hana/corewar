@@ -21,12 +21,12 @@ static void	write_header(t_env *e, int fd)
 	int	empty;
 
 	empty = 0;
-	write_big_endian(e->header.magic, 4, fd);
+	write_big_endian(e->header.magic, 4, fd, 0);
 	i = -1;
 	while (++i < PROG_NAME_LENGTH)
 		write(fd, &e->header.prog_name[i], 1);
 	write(fd, &empty, 4);
-	write_big_endian(e->header.prog_size, 4, fd);
+	write_big_endian(e->header.prog_size, 4, fd, 0);
 	i = -1;
 	while (++i < COMMENT_LENGTH)
 		write(fd, &e->header.comment[i], 1);
@@ -64,7 +64,7 @@ static void	write_direct(t_env *e, t_instr *i, t_arg *a, int fd)
 		tmp = ft_lstfind(e->labels, a->arg_value, sizeof(t_label), &my_lstcmp);
 		nb = ((t_label *)tmp->content)->byte - i->byte;
 	}
-	write_big_endian(nb, (g_op_tab[i->id_instr].is_index) ? 2 : 4, fd);
+	write_big_endian(nb, (g_op_tab[i->id_instr].is_index) ? 2 : 4, fd, 0);
 }
 
 void		write_file(t_env *e, int fd)
@@ -88,7 +88,7 @@ void		write_file(t_env *e, int fd)
 		{
 			if ((a->arg_type == REG_CODE || a->arg_type == IND_CODE)
 				&& ((nb = ft_atoi(a->arg_value)) || 1))
-				write_big_endian(nb, (a->arg_type == REG_CODE) ? 1 : 2, fd);
+				write_big_endian(nb, (a->arg_type == REG_CODE) ? 1 : 2, fd, 0);
 			else
 				write_direct(e, i, a, fd);
 		}

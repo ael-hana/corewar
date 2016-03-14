@@ -55,7 +55,7 @@ void			ft_lstmerge(t_list **alst, t_list *other,
 	{
 		if ((*cmp)(i, other) > 0)
 		{
-			if ((*cmp)(tmp, other) != 0)
+			if ((*cmp)(i, other) != 0)
 				tmp->next = other;
 			else
 				next_step(&tmp, &i);
