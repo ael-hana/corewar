@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:42:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/13 14:18:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/14 15:43:39 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ unsigned int		prog_size(unsigned char *str, int i)
 
 	i < 140 ? error_msg("ERROR : PROG SIZE\n") : 0;
 	len = str[136];
-	len = len << 4;
+	len = len << 8;
 	len += str[137];
-	len = len << 4;
+	len = len << 8;
 	len += str[138];
-	len = len << 4;
+	len = len << 8;
 	len += str[139];
 	!len ? error_msg("ERROR : PROG SIZE\n") : 0;
 	return (len);
@@ -77,7 +77,8 @@ t_header			*check_buf(unsigned char *str, int len)
 	check_comment(str, ptr->comment, len);
 	if ((len - 2192) != ptr->prog_size)
 		error_msg("ERROR : PROG SIZE\n");
-	ptr->inst = malloc(sizeof(unsigned char) * ptr->prog_size);
+	if (!(ptr->inst = malloc(sizeof(unsigned char) * ptr->prog_size)))
+		error_msg("ERROR : CAN'T MALLOC.\n");
 	ft_memcpy(ptr->inst, str + 2192, ptr->prog_size);
 	return (ptr);
 }
