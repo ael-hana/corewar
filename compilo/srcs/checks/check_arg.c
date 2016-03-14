@@ -39,14 +39,15 @@ int	check_register(t_instr *i, char **s, int id_arg)
 
 int	check_direct(t_instr *i, char **s, int id_arg)
 {
+	int	j;
 	int	nb;
 	int	len;
 
 	if ((len = 0) || !(g_op_tab[i->id_instr].params_type[id_arg] & T_DIR)
-			|| **s != DIRECT_CHAR)
+			|| **s != DIRECT_CHAR || (j = 0))
 		return (0);
 	if ((*s)[++len] == LABEL_CHAR && len++)
-		while ((*s)[len] && is_in_buf((*s)[len], LABEL_CHARS))
+		while ((*s)[len] && is_in_buf((*s)[len], LABEL_CHARS) && ++j)
 			len++;
 	else
 	{
@@ -54,11 +55,11 @@ int	check_direct(t_instr *i, char **s, int id_arg)
 		if (g_op_tab[i->id_instr].is_index && (nb < SHRT_MIN || nb > SHRT_MAX))
 			return (0);
 		len += ((*s)[len] == '-' || (*s)[len] == '+') ? 1 : 0;
-		while ((*s)[len] && ft_isdigit((*s)[len]))
+		while ((*s)[len] && ft_isdigit((*s)[len]) && ++j)
 			len++;
 	}
-	if (!len || ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len] != ' '
-				&& (*s)[len] != '\t' && !is_in_buf((*s)[len], COMMENT_CHARS)))
+	if (!len || !j || ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len]
+		!= ' ' && (*s)[len] != '\t' && !is_in_buf((*s)[len], COMMENT_CHARS)))
 		return (0);
 	(*s) += ((*s)[1] == LABEL_CHAR) ? 2 : 1;
 	return (1);
@@ -70,24 +71,19 @@ int	check_indirect(t_instr *i, char **s, int id_arg)
 	int	nb;
 	int	len;
 
-	if ((len = 0) || !(g_op_tab[i->id_instr].params_type[id_arg] & T_IND)
-			|| **s != DIRECT_CHAR)
+	if (!(g_op_tab[i->id_instr].params_type[id_arg] & T_IND))
 		return (0);
-	if ((*s)[++len] == LABEL_CHAR && len++)
-		while ((*s)[len] && is_in_buf((*s)[len], LABEL_CHARS))
-			len++;
-	else
-	{
-		nb = ft_atoi((*s) + len);
-		if (nb < SHRT_MIN || nb > SHRT_MAX)
-			return (0);
-		len += ((*s)[len] == '-' || (*s)[len] == '+') ? 1 : 0;
-		while ((*s)[len] && ft_isdigit((*s)[len]))
-			len++;
-	}
+	nb = ft_atoi(*s);
+	if (nb < SHRT_MIN || nb > SHRT_MAX)
+		return (0);
+	len = (**s == '-' || **s == '+') ? 1 : 0;
+	if (!ft_isdigit((*s)[len]))
+		return (0);
+	while ((*s)[len] && ft_isdigit((*s)[len]))
+		len++;
 	if (!len || ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len] != ' '
 				&& (*s)[len] != '\t' && !is_in_buf((*s)[len], COMMENT_CHARS)))
 		return (0);
-	(*s) += ((*s)[1] == LABEL_CHAR) ? 2 : 1;
+	(*s) += (**s == '-' || **s == '+') ? 1 : 0;
 	return (1);
 }

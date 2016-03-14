@@ -24,38 +24,29 @@ static int	fill_comment(char *bufs[3], int *type, int *size, int *nb)
 	int		len;
 	char	*buf_tmp;
 
-	ft_putendl("message 1");
-	if (!(len = 0) && *(bufs[0]++) != '"')
-		return (0);
-	ft_putendl("message 2");
+	if (!**bufs)
+		return (1);
+	if (!**bufs || (!(len = 0) && *(bufs[0]++) != '"' && *type % 2))
+		return ((!**bufs) ? 1 : 0);
+	(*type) += (*type % 2) ? 1 : 0;
 	while (bufs[0][len] && bufs[0][len] != '"')
 		len++;
 	if (!(buf_tmp = NULL) && !len && bufs[0][len] != '"')
 		return (1);
-	ft_putendl("message 3");
-	ft_printf("%d %d %d\n", len, *size, (*type == 1) ? PROG_NAME_LENGTH : COMMENT_LENGTH);
 	if (len + *size > ((*type == 1) ? PROG_NAME_LENGTH : COMMENT_LENGTH)
 		|| !(buf_tmp = (char *)ft_memrealloc(bufs[1], *size, len + *size)))
-	{
-		ft_printf("%p\n", buf_tmp);
 		return (0);
-	}
-	ft_putendl("message 4");
 	bufs[1] = buf_tmp;
 	ft_memcpy(bufs[1] + *size, bufs[0], len);
-	*size += len;
-	if (bufs[0][len] == '"'
+	if (((*size += len) || 1) && bufs[0][len] == '"'
 		&& ((bufs[0] = jump_whitespaces(bufs[0] + len + 1)) || 1))
 	{
-		ft_putendl("message 5");
-		if ((++(*nb)) && **bufs && !is_in_buf(**bufs, COMMENT_CHARS))
+		if ((**bufs && !is_in_buf(**bufs, COMMENT_CHARS)) || (++(*nb)) * 0)
 			return (0);
-		ft_putendl("message 6");
 		ft_memcpy(bufs[2], bufs[1], *size);
 		ft_memdel((void **)&bufs[1]);
 		*type = (*size *= 0);
 	}
-	ft_putendl("message 7");
 	return (1);
 }
 
@@ -78,33 +69,24 @@ static int	get_header(t_env *e, int fd, char *line, int i)
 
 	ft_memset(vars, 0, 4 * sizeof(int));
 	ft_memset(bufs, 0, 3 * sizeof(char *));
-	ft_putendl("header 1");
 	while ((vars[3] = ft_gnl(fd, &line)) > 0 && ++i)
 	{
 		*bufs = jump_whitespaces(line);
-		ft_putendl("header 2");
 		if (!vars[2] && is_in_buf(**bufs, COMMENT_CHARS))
 			continue ;
-		ft_putendl("header 3");
-		while (**bufs)
-		{
-			ft_putendl("header 4");
-			if (!ft_strncmp(*bufs, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING))
-				&& vars[2] != 2 && !*(bufs[2] = e->header.prog_name))
-				*bufs = jump_word(*bufs, NAME_CMD_STRING) + (vars[2] -= vars[2] - 1) * 0;
-			else if (!ft_strncmp(*bufs, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
-				&& vars[2] != 1 && !*(bufs[2] = e->header.comment))
-				*bufs = jump_word(*bufs, COMMENT_CMD_STRING) + (vars[2] -= vars[2] - 2) * 0;
-			else
-				return (frees_and_quit(&bufs[1], &line, 0));
-			ft_putendl("header 5");
-			if (!(fill_comment(bufs, &vars[2], &vars[1], vars)) || *vars == 2)
-				return (frees_and_quit(&bufs[1], &line, (*vars == 2) ? 1 : 0));
-			ft_putendl("header 6");
-		}
+		if (!ft_strncmp(*bufs, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING))
+			&& vars[2] != 2 && !*(bufs[2] = e->header.prog_name))
+			*bufs = jump_word(*bufs, NAME_CMD_STRING) + (vars[2] -= vars[2] - 1) * 0;
+		else if (!ft_strncmp(*bufs, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
+			&& vars[2] != 1 && !*(bufs[2] = e->header.comment))
+			*bufs = jump_word(*bufs, COMMENT_CMD_STRING) + (vars[2] -= vars[2] - 3) * 0;
+		else if (!vars[2])
+			return (frees_and_quit(&bufs[1], &line, 0));
+		if (!(fill_comment(bufs, &vars[2], &vars[1], vars)) || *vars == 2)
+			return (frees_and_quit(&bufs[1], &line, (*vars == 2) ? 1 : 0));
+		ft_memset(line, 0, ft_strlen(line));
 	}
-	ft_putendl("header 7");
-	return (frees_and_quit(&bufs[1], &line, (!i) ? 0 : vars[3] + 1));
+	return (frees_and_quit(&bufs[1], &line, (vars[3] == -1) ? -1 : *vars == 2));
 }
 
 static int	is_label(t_env *e, char **s, int byte)
@@ -139,28 +121,22 @@ int			analyse_file_and_fill_env(t_env *e, int fd)
 	int		byte;
 	char	*line;
 
-	ft_putendl("read 1");
 	if (!get_header(e, fd, NULL, 0))
 		return (0);
 	byte = 0;
 	line = NULL;
-	ft_putendl("read 2");
 	while ((ret = ft_gnl(fd, &line)) > 0)
 	{
 		tmp = jump_whitespaces(line);
 		if (!*tmp || is_in_buf(*tmp, COMMENT_CHARS))
 			continue ;
-		ft_putendl("read 3");
 		if (!is_label(e, &tmp, byte))
 			return (frees_and_quit(&line, NULL, 0));
-		ft_putendl("read 4");
 		if (!*tmp || is_in_buf(*tmp, COMMENT_CHARS))
 			continue ;
 		if (!is_good_instru(e, tmp, &byte))
 			return (frees_and_quit(&line, NULL, 0));
-		ft_putendl("read 5");
 	}
-	ft_putendl("read 6");
 	e->header.prog_size = byte;
 	e->header.magic = COREWAR_EXEC_MAGIC;
 	ft_memdel((void **)&line);

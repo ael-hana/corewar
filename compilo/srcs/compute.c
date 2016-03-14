@@ -28,24 +28,16 @@ int			my_compute(char *file_name, int opt)
 	int		fd;
 	int		ret;
 
-	ft_putendl("compute 1");
 	if (!(e = (t_env *)ft_memalloc(sizeof(t_env))))
 		return (0);
-	ft_putendl("compute 2");
 	if ((fd = open(file_name, O_RDWR)) == -1)
 	{
 		ft_printf("Can't read source file %s\n", file_name);
 		return (free_and_quit(e, -1));
 	}
-	ft_putendl("compute 3");
 	if ((ret = analyse_file_and_fill_env(e, fd)))
-	{
-		ft_putendl("compute 4");
 		use_env_to_compile(e, opt);
-	}
-	ft_putendl("compute 5");
 	if ((fd = close(fd)) == -1)
 		ft_printf("Can't close source file %s\tBe carreful !!!\n", file_name);
-	ft_putendl("compute 6");
 	return (free_and_quit(e, ret));
 }

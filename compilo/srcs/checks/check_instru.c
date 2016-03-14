@@ -46,8 +46,8 @@ static char		*my_strdup(char **s)
 	char	*tmp;
 
 	len = 0;
-	while ((*s)[len] && (*s)[len] != SEPARATOR_CHAR
-			&& !is_in_buf((*s)[len], COMMENT_CHARS))
+	while ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len] != ' '
+			&& !is_in_buf((*s)[len], COMMENT_CHARS) && (*s)[len] != '\t')
 		len++;
 	if (!(tmp = (char *)ft_strnew(len)))
 		return (NULL);
@@ -64,15 +64,10 @@ static t_list	*check_args(t_instr *i, char **s, int *byte, int id_arg)
 	t_arg	add;
 	t_list	*tmp;
 
-	ft_putendl("args 1");
-	ft_printf("-'%s'-%p\n", *s, i->args);
 	if ((tmp = NULL) || !**s || is_in_buf(**s, COMMENT_CHARS))
 		return (i->args);
-	ft_putendl("args 2");
 	if (id_arg >= g_op_tab[i->id_instr].params_nb)
 		return (free_and_quit_arg(&i->args));
-	ft_putendl("args 3");
-	ft_printf("'%s'\n", *s);
 	if (check_register(i, s, id_arg) && ++(*byte))
 		add.arg_type = T_REG;
 	else if (check_direct(i, s, id_arg))
@@ -84,11 +79,9 @@ static t_list	*check_args(t_instr *i, char **s, int *byte, int id_arg)
 		add.arg_type = T_IND;
 	else
 		return (free_and_quit_arg(&i->args));
-	ft_putendl("args 4");
 	if (!(add.arg_value = my_strdup(s))
 		|| !(tmp = ft_lstnew(&add, sizeof(t_arg))))
 		return (free_and_quit_arg(&i->args));
-	ft_putendl("args 5");
 	ft_lstpush(&i->args, tmp);
 	return (check_args(i, s, byte, id_arg + 1));
 }
@@ -99,11 +92,8 @@ int				is_good_instru(t_env *e, char *s, int *byte)
 	t_instr	add;
 	t_list	*tmp;
 
-	ft_putendl("instru 1");
-	ft_printf("'%s---'", s);
 	if ((id = is_real_instru(&s)) == -1)
 		return (0);
-	ft_putendl("instru 2");
 	add.byte = (*byte++);
 	if (g_op_tab[id].code_byte)
 		(*byte)++;
@@ -111,14 +101,11 @@ int				is_good_instru(t_env *e, char *s, int *byte)
 	add.args = NULL;
 	if (!(add.args = check_args(&add, &s, byte, 0)))
 		return (0);
-	ft_putendl("instru 3");
 	if (!(tmp = ft_lstnew(&add, sizeof(t_instr))))
 	{
 		ft_lstdel(&add.args, &my_arg_del);
 		return (0);
 	}
-	ft_putendl("instru 4");
 	ft_lstpush(&e->instrs, tmp);
-	ft_putendl("instru 5");
 	return (1);
 }
