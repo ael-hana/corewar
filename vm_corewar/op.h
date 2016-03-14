@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/13 18:01:19 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/14 17:50:46 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef char		t_arg_type;
 
 typedef struct		s_process
 {
+	int				cycle;
 	int				carry;
 	int				reg[16];
 	int				position;
@@ -134,5 +135,6 @@ void			print_error(char *str);
 int				str_is_digit(char *str);
 int				parse_flags(int ac, char **av, t_env *data);
 int				parse_players(int ac, char **av, t_env *data);
+void			print_player_introduction(t_list *player_list);
 
 #endif
