@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/14 15:43:39 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/14 21:11:57 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,7 @@ void			print_error(char *str);
 int				str_is_digit(char *str);
 int				parse_flags(int ac, char **av, t_env *data);
 int				parse_players(int ac, char **av, t_env *data);
+unsigned int	recup_val(int code, unsigned char *arena, int *i);
+unsigned int	recup_reg_n(unsigned char *arena, int *i);
 
 #endif
