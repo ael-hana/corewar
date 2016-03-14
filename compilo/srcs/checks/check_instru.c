@@ -51,8 +51,8 @@ static char		*my_strdup(char **s)
 		len++;
 	if (!(tmp = (char *)ft_strnew(len)))
 		return (NULL);
-	len += ((*s)[len] == SEPARATOR_CHAR) ? 1 : 0;
 	ft_memcpy(tmp, *s, len);
+	len += ((*s)[len] == SEPARATOR_CHAR) ? 1 : 0;
 	while ((*s)[len] && ((*s)[len] == ' ' || (*s)[len] == '\t'))
 		len++;
 	(*s) += len;
@@ -64,19 +64,20 @@ static t_list	*check_args(t_instr *i, char **s, int *byte, int id_arg)
 	t_arg	add;
 	t_list	*tmp;
 
+	add.arg_type = 0;
 	if ((tmp = NULL) || !**s || is_in_buf(**s, COMMENT_CHARS))
 		return (i->args);
 	if (id_arg >= g_op_tab[i->id_instr].params_nb)
 		return (free_and_quit_arg(&i->args));
 	if (check_register(i, s, id_arg) && ++(*byte))
-		add.arg_type = T_REG;
-	else if (check_direct(i, s, id_arg))
+		add.arg_type = REG_CODE;
+	else if (check_direct(i, s, id_arg, &add))
 	{
-		add.arg_type = T_DIR;
+		add.arg_type |= DIR_CODE;
 		(*byte) += (g_op_tab[i->id_instr].is_index) ? 2 : 4;
 	}
 	else if (check_indirect(i, s, id_arg) && ((*byte += 2)))
-		add.arg_type = T_IND;
+		add.arg_type = IND_CODE;
 	else
 		return (free_and_quit_arg(&i->args));
 	if (!(add.arg_value = my_strdup(s))
@@ -94,7 +95,7 @@ int				is_good_instru(t_env *e, char *s, int *byte)
 
 	if ((id = is_real_instru(&s)) == -1)
 		return (0);
-	add.byte = (*byte++);
+	add.byte = (*byte)++;
 	if (g_op_tab[id].code_byte)
 		(*byte)++;
 	add.id_instr = id;

@@ -2,6 +2,8 @@
 
 dir="tests"
 
+rm -f **/*.cor
+
 for subdir in `ls $dir`
 do
 	if [ $subdir != "script.sh" ]

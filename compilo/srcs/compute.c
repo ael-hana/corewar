@@ -22,6 +22,19 @@ static int	free_and_quit(t_env *e, int ret)
 	return (ret);
 }
 
+static char	*my_cor_name_func(char *name)
+{
+	int		len;
+	char	*tmp;
+
+	len = ft_strlen(name);
+	if (!(tmp = (char *)ft_strnew(len + 2)))
+		return (NULL);
+	ft_memcpy(tmp, name, len - 1);
+	ft_memcpy(tmp + len - 1, "cor", 3);
+	return (tmp);
+}
+
 int			my_compute(char *file_name, int opt)
 {
 	t_env	*e;
@@ -36,7 +49,7 @@ int			my_compute(char *file_name, int opt)
 		return (free_and_quit(e, -1));
 	}
 	if ((ret = analyse_file_and_fill_env(e, fd)))
-		use_env_to_compile(e, opt);
+		ret = use_env_to_compile(e, my_cor_name_func(file_name), opt);
 	if ((fd = close(fd)) == -1)
 		ft_printf("Can't close source file %s\tBe carreful !!!\n", file_name);
 	return (free_and_quit(e, ret));

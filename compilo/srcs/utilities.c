@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "compilo.h"
 
 char	*jump_word(char *s, char *ref)
@@ -36,4 +37,25 @@ int		is_in_buf(char c, char *buf)
 		if (*(buf++) == c)
 			return (1);
 	return (0);
+}
+
+void	write_big_endian(long nb, int size, int fd)
+{
+	unsigned int	tmp;
+
+	tmp = 0;
+	if (size == 4)
+	{
+		tmp = nb >> 24;
+		write(fd, &tmp, 1);
+		tmp = (nb - (tmp << 24)) >> 16;
+		write(fd, &tmp, 1);
+	}
+	if (size >= 2)
+	{
+		tmp = (nb - (tmp << 16)) >> 8;
+		write(fd, &tmp, 1);
+	}
+	tmp = nb - (tmp << 8);
+	write(fd, &tmp, 1);
 }

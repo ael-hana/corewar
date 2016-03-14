@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/13 17:55:48 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/14 17:41:20 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		main(int ac, char **av)
 	parse_players(ac, av, &data);
 	create_arena(&data);
 	place_players(&data);
+	print_player_introduction(data.player_list);
 	print_arena(data.arena);
 //	start_game(&data);
 	return (0);
