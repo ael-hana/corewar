@@ -79,7 +79,7 @@ static void	print_end_comment(char *file_name, int ret, int opt)
 	if (ret)
 		ft_putstr("Writing output program to ");
 	else
-		ft_putstr("And error occured during the writing of ");
+		ft_putstr("An error occured during the writing of ");
 	while (*file_name && *(file_name + 1))
 		ft_putchar(*(file_name++));
 	ft_putendl("cor");
@@ -95,8 +95,8 @@ int			main(int ac, char **av)
 		return (my_help());
 	if ((opt = check_flag(ac, av)) == 2)
 		return (my_help());
-	i = 0;
-	while (++i < ac)
+	i = ac;
+	while (--i > 0)
 	{
 		if (*av[i] == '-' && av[i][1] != '-'
 			&& is_in_buf('a', av[i] + 1))

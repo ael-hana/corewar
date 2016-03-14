@@ -72,7 +72,7 @@ static int	get_header(t_env *e, int fd, char *line, int i)
 	while ((vars[3] = ft_gnl(fd, &line)) > 0 && ++i)
 	{
 		*bufs = jump_whitespaces(line);
-		if (!vars[2] && is_in_buf(**bufs, COMMENT_CHARS))
+		if (!vars[2] && (is_in_buf(**bufs, COMMENT_CHARS) || !**bufs))
 			continue ;
 		if (!ft_strncmp(*bufs, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING))
 			&& vars[2] != 2 && !*(bufs[2] = e->header.prog_name))
@@ -84,7 +84,6 @@ static int	get_header(t_env *e, int fd, char *line, int i)
 			return (frees_and_quit(&bufs[1], &line, 0));
 		if (!(fill_comment(bufs, &vars[2], &vars[1], vars)) || *vars == 2)
 			return (frees_and_quit(&bufs[1], &line, (*vars == 2) ? 1 : 0));
-		ft_memset(line, 0, ft_strlen(line));
 	}
 	return (frees_and_quit(&bufs[1], &line, (vars[3] == -1) ? -1 : *vars == 2));
 }
