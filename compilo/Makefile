@@ -18,7 +18,8 @@ SRCS	=	srcs/op.c srcs/main.c srcs/compute.c srcs/lst_funcs.c \
 			srcs/utilities.c \
 			srcs/checks/read_file.c srcs/checks/check_instru.c \
 			srcs/checks/check_arg.c \
-			srcs/fill/compilo.c
+			srcs/fill/compilo.c srcs/fill/write_in_file.c \
+			srcs/fill/write_steps.c
 
 OBJS	=	$(SRCS:.c=.o)
 

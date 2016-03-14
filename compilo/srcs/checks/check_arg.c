@@ -37,7 +37,7 @@ int	check_register(t_instr *i, char **s, int id_arg)
 	return (1);
 }
 
-int	check_direct(t_instr *i, char **s, int id_arg)
+int	check_direct(t_instr *i, char **s, int id_arg, t_arg *add)
 {
 	int	j;
 	int	nb;
@@ -61,6 +61,7 @@ int	check_direct(t_instr *i, char **s, int id_arg)
 	if (!len || !j || ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len]
 		!= ' ' && (*s)[len] != '\t' && !is_in_buf((*s)[len], COMMENT_CHARS)))
 		return (0);
+	add->arg_type |= ((*s)[1] == LABEL_CHAR) ? T_LAB : 0;
 	(*s) += ((*s)[1] == LABEL_CHAR) ? 2 : 1;
 	return (1);
 }
@@ -84,6 +85,5 @@ int	check_indirect(t_instr *i, char **s, int id_arg)
 	if (!len || ((*s)[len] && (*s)[len] != SEPARATOR_CHAR && (*s)[len] != ' '
 				&& (*s)[len] != '\t' && !is_in_buf((*s)[len], COMMENT_CHARS)))
 		return (0);
-	(*s) += (**s == '-' || **s == '+') ? 1 : 0;
 	return (1);
 }

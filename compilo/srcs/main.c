@@ -48,7 +48,7 @@ static int	my_help(void)
 	ft_putendl("\n\n\tInstructions :");
 	print_instrus();
 	ft_putendl("\tMany instructions can't be on the same line, label names");
-	ft_printf("\thave to exist and ech argument are separated by a '%c'\n",
+	ft_printf("\thave to exist and each argument are separated by a '%c'\n",
 	SEPARATOR_CHAR);
 	return (0);
 }
@@ -88,10 +88,11 @@ static void	print_end_comment(char *file_name, int ret, int opt)
 int			main(int ac, char **av)
 {
 	int	i;
+	int	j;
 	int	opt;
 	int	len;
 
-	if (ac == 1)
+	if (!(j = 0) && ac == 1)
 		return (my_help());
 	if ((opt = check_flag(ac, av)) == 2)
 		return (my_help());
@@ -101,11 +102,14 @@ int			main(int ac, char **av)
 		if (*av[i] == '-' && av[i][1] != '-'
 			&& is_in_buf('a', av[i] + 1))
 			continue ;
+		j++;
 		len = ft_strlen(av[i]);
 		if (av[i][len - 2] != '.' || av[i][len - 1] != 's')
 			ft_printf("%s is not a .s file\n", av[i]);
 		else
 			print_end_comment(av[i], my_compute(av[i], opt), opt);
 	}
+	if (!j)
+		return (my_help());
 	return (0);
 }

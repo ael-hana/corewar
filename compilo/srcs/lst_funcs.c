@@ -43,7 +43,6 @@ void	my_instr_del(void *content, size_t size)
 
 int		my_lstcmp(const t_list *cmp, const void *content, size_t size)
 {
-	if (size == sizeof(t_label))
-		return (!ft_strcmp(content, ((t_label *)cmp->content)->name));
-	return (1);
+	(void)size;
+	return (!ft_strcmp(content, ((t_label *)cmp->content)->name));
 }

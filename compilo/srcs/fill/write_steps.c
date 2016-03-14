@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   write_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 03:26:02 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/11 15:28:36 by ael-hana         ###   ########.fr       */
+/*   Created: 2016/03/11 18:09:23 by tle-meur          #+#    #+#             */
+/*   Updated: 2016/03/11 18:10:10 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "compilo.h"
 
-size_t	ft_strlen(const char *s)
+void	write_compilo_steps(t_env *e)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
-		i++;
-	return (i);
+	(void)e;
 }

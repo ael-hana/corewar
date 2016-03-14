@@ -48,8 +48,9 @@ int				my_compute(char *file_name, int opt);
 **	utilities.c
 */
 char			*jump_whitespaces(char *s);
-char			*jump_word(char *s, char *ref);
 int				is_in_buf(char c, char *buf);
+char			*jump_word(char *s, char *ref);
+void			write_big_endian(long nb, int size, int fd);
 
 /*
 **	lst_funcs.c
@@ -64,13 +65,15 @@ int				my_lstcmp(const t_list *cmp, const void *content, size_t size);
 */
 int				analyse_file_and_fill_env(t_env *e, int fd);
 int				is_good_instru(t_env *e, char *s, int *byte);
-int				check_direct(t_instr *i, char **s, int id_arg);
 int				check_indirect(t_instr *i, char **s, int id_arg);
 int				check_register(t_instr *i, char **s, int id_arg);
+int				check_direct(t_instr *i, char **s, int id_arg, t_arg *add);
 
 /*
 **	fill/
 */
-void			use_env_to_compile(t_env *e, int opt);
+void			write_file(t_env *e, int fd);
+void			write_compilo_steps(t_env *e);
+int				use_env_to_compile(t_env *e, char *file_name, int opt);
 
 #endif
