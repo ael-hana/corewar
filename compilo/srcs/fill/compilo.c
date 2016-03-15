@@ -59,7 +59,7 @@ static int	find_code_byte(t_list *tmp)
 	return (nb);
 }
 
-static void	prepare_code(t_env *e)
+static int	prepare_code(t_env *e)
 {
 	t_arg	*a;
 	t_instr	*i;
@@ -85,22 +85,32 @@ static void	prepare_code(t_env *e)
 			}
 		tmp1 = tmp1->next;
 	}
+	return (1);
+}
+
+static int	write_header(t_env *e)
+{
+	ft_putendl("Dumping annoted program on standard output");
+	ft_printf("Program size : %d byte(s)\n", e->header.prog_size);
+	ft_printf("Name : \"%s\"\n", e->header.prog_name);
+	ft_printf("Comment : \"%s\"\n", e->header.comment);
+	ft_putchar('\n');
+	return (1);
 }
 
 int			use_env_to_compile(t_env *e, char *file_name, int opt)
 {
 	int	fd;
 
-	if (!file_name || !check_good_labels(e))
+	if (!file_name || !check_good_labels(e) || !prepare_code(e))
 	{
 		ft_memdel((void **)&file_name);
 		return (0);
 	}
-	prepare_code(e);
 	if (!opt)
 	{
 		if ((fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR + S_IWUSR
-						+ S_IRGRP + S_IWGRP + S_IROTH)) == -1)
+			+ S_IRGRP + S_IWGRP + S_IROTH)) == -1)
 		{
 			ft_memdel((void **)&file_name);
 			return (0);
@@ -109,7 +119,7 @@ int			use_env_to_compile(t_env *e, char *file_name, int opt)
 		if ((fd = close(fd)) == -1)
 			ft_printf("Can't close source file %s\nBe carreful !!!\n", file_name);
 	}
-	else
+	else if (write_header(e))
 		write_compilo_steps(e);
 	ft_memdel((void **)&file_name);
 	return (1);
