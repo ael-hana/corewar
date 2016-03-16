@@ -6,7 +6,7 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 16:14:49 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/11 19:19:25 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:41:02 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ int		is_in_buf(char c, char *buf)
 	return (0);
 }
 
+int		frees_and_quit(char **a, char **b, int ret)
+{
+	ft_memdel((void **)a);
+	ft_memdel((void **)b);
+	return (ret);
+}
+
 void	write_big_endian(long nb, int size, int fd, int nbr)
 {
 	unsigned int	tmp;
@@ -57,6 +64,8 @@ void	write_big_endian(long nb, int size, int fd, int nbr)
 		(nbr) ? ft_printf("%-4d", tmp) : write(fd, &tmp, 1);
 	}
 	tmp = nb - (tmp << 8);
-	(nbr) ? ft_printf("%-*d", 4 * ((size == 2) ? 3 : 1), tmp)
-	: write(fd, &tmp, 1);
+	if (nbr)
+		ft_printf("%-*d", 4 * ((size == 2) ? 3 : 1), tmp);
+	else
+		write(fd, &tmp, 1);
 }

@@ -6,17 +6,25 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 16:07:58 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/11 20:05:10 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:41:58 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "compilo.h"
 
-static int	frees_and_quit(char **a, char **b, int ret)
+static int	my_trash(char *bufs[3], int *type, int *size)
 {
-	ft_memdel((void **)a);
-	ft_memdel((void **)b);
-	return (ret);
+	char	*buf_tmp;
+
+	if (!(*type % 2))
+	{
+		if (*size + 1 > ((*type < 3) ? PROG_NAME_LENGTH : COMMENT_LENGTH)
+		|| !(buf_tmp = (char *)ft_memrealloc(bufs[1], *size, *size + 1)))
+			return (0);
+		bufs[1] = buf_tmp;
+		bufs[1][(*size)++] = '\n';
+	}
+	return (1);
 }
 
 static int	fill_comment(char *bufs[3], int *type, int *size, int *nb)
@@ -24,28 +32,26 @@ static int	fill_comment(char *bufs[3], int *type, int *size, int *nb)
 	int		len;
 	char	*buf_tmp;
 
-	if (!**bufs)
-		return (1);
-	if (!**bufs || (!(len = 0) && *(bufs[0]++) != '"' && *type % 2))
+	if (!my_trash(bufs, type, size))
+		return (0);
+	if (!**bufs || (!(len = 0) && *type % 2 && *(bufs[0]++) != '"'))
 		return ((!**bufs) ? 1 : 0);
 	(*type) += (*type % 2) ? 1 : 0;
 	while (bufs[0][len] && bufs[0][len] != '"')
 		len++;
 	if (!(buf_tmp = NULL) && !len && bufs[0][len] != '"')
 		return (1);
-	if (len + *size > ((*type == 1) ? PROG_NAME_LENGTH : COMMENT_LENGTH)
+	if (len + *size > ((*type < 3) ? PROG_NAME_LENGTH : COMMENT_LENGTH)
 		|| !(buf_tmp = (char *)ft_memrealloc(bufs[1], *size, len + *size)))
 		return (0);
-	bufs[1] = buf_tmp;
-	ft_memcpy(bufs[1] + *size, bufs[0], len);
+	ft_memcpy((bufs[1] = buf_tmp) + *size, bufs[0], len);
 	if (((*size += len) || 1) && bufs[0][len] == '"'
 		&& ((bufs[0] = jump_whitespaces(bufs[0] + len + 1)) || 1))
 	{
-		if ((**bufs && !is_in_buf(**bufs, COMMENT_CHARS)) || (++(*nb)) * 0)
+		if ((**bufs && !is_in_buf(**bufs, COMMENT_CHARS)))
 			return (0);
 		ft_memcpy(bufs[2], bufs[1], *size);
-		ft_memdel((void **)&bufs[1]);
-		*type = (*size *= 0);
+		frees_and_quit(&bufs[1], NULL, (++(*nb)) ? (*type = (*size *= 0)) : 0);
 	}
 	return (1);
 }
@@ -75,11 +81,14 @@ static int	get_header(t_env *e, int fd, char *line, int i)
 		if (!vars[2] && (is_in_buf(**bufs, COMMENT_CHARS) || !**bufs))
 			continue ;
 		if (!ft_strncmp(*bufs, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING))
-			&& vars[2] != 2 && !*(bufs[2] = e->header.prog_name))
-			*bufs = jump_word(*bufs, NAME_CMD_STRING) + (vars[2] -= vars[2] - 1) * 0;
-		else if (!ft_strncmp(*bufs, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING))
-			&& vars[2] != 1 && !*(bufs[2] = e->header.comment))
-			*bufs = jump_word(*bufs, COMMENT_CMD_STRING) + (vars[2] -= vars[2] - 3) * 0;
+			&& vars[2] < 2 && !*(bufs[2] = e->header.prog_name))
+			*bufs = jump_word(*bufs, NAME_CMD_STRING)
+			+ (vars[2] -= vars[2] - 1) * 0;
+		else if (!ft_strncmp(*bufs, COMMENT_CMD_STRING,
+			ft_strlen(COMMENT_CMD_STRING)) && (!vars[2] || vars[2] > 2)
+			&& !*(bufs[2] = e->header.comment))
+			*bufs = jump_word(*bufs, COMMENT_CMD_STRING)
+			+ (vars[2] -= vars[2] - 3) * 0;
 		else if (!vars[2])
 			return (frees_and_quit(&bufs[1], &line, 0));
 		if (!(fill_comment(bufs, &vars[2], &vars[1], vars)) || *vars == 2)

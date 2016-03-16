@@ -6,7 +6,7 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:48:49 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/10 20:13:06 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:14:03 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,23 @@ static int	check_flag(int ac, char **av)
 
 static void	print_end_comment(char *file_name, int ret, int opt)
 {
-	if (opt || ret == -1)
+	if (ret == -1)
 		return ;
-	if (ret)
+	if (ret && !opt)
 		ft_putstr("Writing output program to ");
 	else
-		ft_putstr("An error occured during the writing of ");
+	{
+		if (opt)
+			ft_putstr("An error occured during the reading of ");
+		else
+			ft_putstr("An error occured during the writing of ");
+	}
 	while (*file_name && *(file_name + 1))
 		ft_putchar(*(file_name++));
-	ft_putendl("cor");
+	if (opt)
+		ft_putendl("s");
+	else
+		ft_putendl("cor");
 }
 
 int			main(int ac, char **av)

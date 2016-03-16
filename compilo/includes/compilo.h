@@ -6,7 +6,7 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:29:56 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/11 19:10:33 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:41:29 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				my_compute(char *file_name, int opt);
 char			*jump_whitespaces(char *s);
 int				is_in_buf(char c, char *buf);
 char			*jump_word(char *s, char *ref);
+int				frees_and_quit(char **a, char **b, int ret);
 void			write_big_endian(long nb, int size, int fd, int nbr);
 
 /*

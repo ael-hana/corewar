@@ -4,7 +4,7 @@ dir="diffs"
 
 rm -f *.cor
 cp ../champions/*.s $dir
-./asm $dir/*.s > /dev/null
+./asm $dir/*.s
 rm -f $dir/*.s
 
 for file in `ls $dir`

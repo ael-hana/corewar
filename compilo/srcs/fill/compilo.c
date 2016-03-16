@@ -6,7 +6,7 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 18:09:23 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/11 18:10:10 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:20:40 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int			use_env_to_compile(t_env *e, char *file_name, int opt)
 		}
 		write_file(e, fd);
 		if ((fd = close(fd)) == -1)
-			ft_printf("Can't close source file %s\nBe carreful !!!\n", file_name);
+			ft_printf("Can't close source file %s\nBe carreful !!!\n",
+			file_name);
 	}
 	else if (write_header(e))
 		write_compilo_steps(e);

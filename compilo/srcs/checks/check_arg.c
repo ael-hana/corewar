@@ -6,7 +6,7 @@
 /*   By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:50 by tle-meur          #+#    #+#             */
-/*   Updated: 2016/03/11 19:50:02 by tle-meur         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:20:00 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	check_direct(t_instr *i, char **s, int id_arg, t_arg *add)
 	(*s) += ((*s)[1] == LABEL_CHAR) ? 2 : 1;
 	return (1);
 }
-
 
 int	check_indirect(t_instr *i, char **s, int id_arg)
 {
