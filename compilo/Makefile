@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	./asm
+NAME	=	asm
 
-FLAGS	=	-g -Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror
 
 SRCS	=	srcs/op.c srcs/main.c srcs/compute.c srcs/lst_funcs.c \
 			srcs/utilities.c \

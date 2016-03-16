@@ -76,21 +76,21 @@ static void	print_end_comment(char *file_name, int ret, int opt)
 {
 	if (ret == -1)
 		return ;
-	if (ret && !opt)
-		ft_putstr("Writing output program to ");
+	if (opt)
+	{
+		if (!ret)
+			ft_printf("An error occured during the reading of %s\n", file_name);
+	}
 	else
 	{
-		if (opt)
-			ft_putstr("An error occured during the reading of ");
+		if (ret)
+			ft_printf("Writing output program to ");
 		else
 			ft_putstr("An error occured during the writing of ");
-	}
-	while (*file_name && *(file_name + 1))
-		ft_putchar(*(file_name++));
-	if (opt)
-		ft_putendl("s");
-	else
+		while (*file_name && *(file_name + 1))
+			ft_putchar(*(file_name++));
 		ft_putendl("cor");
+	}
 }
 
 int			main(int ac, char **av)

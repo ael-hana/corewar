@@ -54,18 +54,18 @@ void	write_big_endian(long nb, int size, int fd, int nbr)
 	if (size == 4)
 	{
 		tmp = nb >> 24;
-		(nbr) ? ft_printf("%-4d", tmp) : write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%-4hhu", tmp) : write(fd, &tmp, 1);
 		tmp = (nb - (tmp << 24)) >> 16;
-		(nbr) ? ft_printf("%-4d", tmp) : write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%-4hhu", tmp) : write(fd, &tmp, 1);
 	}
 	if (size >= 2)
 	{
 		tmp = (nb - (tmp << 16)) >> 8;
-		(nbr) ? ft_printf("%-4d", tmp) : write(fd, &tmp, 1);
+		(nbr) ? ft_printf("%-4hhu", tmp) : write(fd, &tmp, 1);
 	}
 	tmp = nb - (tmp << 8);
 	if (nbr)
-		ft_printf("%-*d", 4 * ((size == 2) ? 3 : 1), tmp);
+		ft_printf("%-*hhu", 4 * ((size == 2) ? 3 : 1), tmp);
 	else
 		write(fd, &tmp, 1);
 }
