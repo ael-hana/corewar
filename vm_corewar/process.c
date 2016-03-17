@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 17:28:24 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/16 15:49:38 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 21:30:47 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_process		*create_process(t_process *father_process, int n, int position)
 {
 	t_process	*new_process;
 
-	new_process = malloc(sizeof(t_process));
+	if (!(new_process = malloc(sizeof(t_process))))
+		error_msg("CAN'T MALLOC\n");
 	if (father_process == NULL)
 	{
 		new_process->cycle = -1;
