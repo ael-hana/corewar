@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 17:28:24 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 21:30:47 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:03:27 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ t_process		*create_process(t_process *father_process, int n, int position)
 		new_process->reg[0] = n;
 		new_process->alive = 1;
 		new_process->last_alive = 0;
+	}
+	else
+	{
+		new_process = father_process;
+		new_process->position = (n + position) % IDX_MOD;
 	}
 	return (new_process);
 }

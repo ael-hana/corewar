@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 21:40:41 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:14:51 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,40 +124,36 @@ typedef struct		s_op
 
 extern t_op			op_tab[17];
 
-void			exec_instruction(t_env *data, t_process *process);
-unsigned int	live(unsigned char *arena, t_process *process);
-unsigned int	ld(unsigned char *arena, t_process *process);
-unsigned int	st(unsigned char *arena, t_process *process);
-unsigned int	add(unsigned char *arena, t_process *process);
-unsigned int	sub(unsigned char *arena, t_process *process);
-unsigned int	andd(unsigned char *arena, t_process *process);
-unsigned int	orr(unsigned char *arena, t_process *process);
-unsigned int	xorr(unsigned char *arena, t_process *process);
-unsigned int	zjmp(unsigned char *arena, t_process *process);
-unsigned int	ldi(unsigned char *arena, t_process *process);
-unsigned int		sti(unsigned char *arena, t_process *process);
-
-void			write_hex(int position, unsigned char *arena, int val);
-
-void			print_info(t_env *data);
-void			get_inst(t_process *process, unsigned char *arena);
-t_process		*create_process(t_process *father_process, int n, int position);
-void			start_game(t_env *data);
-void			print_error(char *str);
-int				str_is_digit(char *str);
-int				parse_flags(int ac, char **av, t_env *data);
-int				parse_players(int ac, char **av, t_env *data);
-void			create_arena(t_env *data);
-void			print_arena(unsigned char *arena);
-void			place_players(t_env *data);
-t_header		*create_player(char *path);
-void			error_msg(char *str);
-t_header		*check_buf(unsigned char *str, int len);
-int				str_is_digit(char *str);
-int				parse_flags(int ac, char **av, t_env *data);
-int				parse_players(int ac, char **av, t_env *data);
-unsigned int	recup_val(int code, unsigned char *arena, int *i);
-unsigned int	recup_reg_n(unsigned char *arena, int *i);
-void			print_player_introduction(t_list *player_list);
+void				exec_instruction(t_env *data, t_process *process);
+unsigned int		live(unsigned char *arena, t_process *process);
+unsigned int		ld(unsigned char *arena, t_process *process);
+unsigned int		st(unsigned char *arena, t_process *process);
+unsigned int		add(unsigned char *arena, t_process *process);
+unsigned int		sub(unsigned char *arena, t_process *process);
+unsigned int		andd(unsigned char *arena, t_process *process);
+unsigned int		orr(unsigned char *arena, t_process *process);
+unsigned int		xorr(unsigned char *arena, t_process *process);
+unsigned int		zjmp(unsigned char *arena, t_process *process);
+unsigned int		ldi(unsigned char *arena, t_process *process);
+void				write_hex(int position, unsigned char *arena, int val);
+void				get_inst(t_process *process, unsigned char *arena);
+t_process			*create_process(t_process *father_process, int n, int position);
+void				start_game(t_env *data);
+void				print_error(char *str);
+int					str_is_digit(char *str);
+int					parse_flags(int ac, char **av, t_env *data);
+int					parse_players(int ac, char **av, t_env *data);
+void				create_arena(t_env *data);
+void				print_arena(unsigned char *arena);
+void				place_players(t_env *data);
+t_header			*create_player(char *path);
+void				error_msg(char *str);
+t_header			*check_buf(unsigned char *str, int len);
+int					str_is_digit(char *str);
+int					parse_flags(int ac, char **av, t_env *data);
+int					parse_players(int ac, char **av, t_env *data);
+unsigned int		recup_val(int code, unsigned char *arena, int *i);
+unsigned int		recup_reg_n(unsigned char *arena, int *i);
+void				print_player_introduction(t_list *player_list);
 
 #endif

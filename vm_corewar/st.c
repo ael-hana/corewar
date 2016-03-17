@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 20:32:34 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 18:56:36 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 22:22:04 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ unsigned int		st(unsigned char *arena, t_process *process)
 		return (process->carry = 0);
 	write_hex((process->position + (tab[1] % IDX_MOD)) % MEM_SIZE, arena, tab[0]);
 	process->position = ++process->position % MEM_SIZE;
-	return (process->carry = tab[1] == 0 ? 1 : 0);
+	return (0);
 }
