@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:05:35 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 15:22:53 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 17:41:08 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned int		or_bitwise(t_process *process, unsigned int *tab)
 {
 	process->position = ++process->position % MEM_SIZE;
 	process->reg[tab[2]] = tab[1] | tab[0];
-	return (process->carry = 1);
+	return (process->carry = process->reg[tab[2]] == 0 ? 1 : 0);
 }
 
 unsigned int		orr(unsigned char *arena, t_process *process)

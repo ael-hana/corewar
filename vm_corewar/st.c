@@ -6,11 +6,24 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 20:32:34 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/14 21:11:17 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:56:36 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
+
+void				write_hex(int position, unsigned char *arena, int val)
+{
+	int				st;
+
+	st = 24;
+	while (st >= 0)
+	{
+		arena[position % MEM_SIZE] = (val >> st) & 0x000000FF;
+		++position;
+		st -= 8;
+	}
+}
 
 unsigned int		st(unsigned char *arena, t_process *process)
 {
@@ -22,17 +35,17 @@ unsigned int		st(unsigned char *arena, t_process *process)
 		return (process->carry = 0);
 	if (((arena[i] >> 6) & 0b00000011) == 1 &&
 			(reg_n = recup_val(1, arena, &process->position) < 17))
-		tab[1] = process->reg[reg_n];
+		tab[0] = process->reg[reg_n];
 	else
 		return (process->carry = 0);
 	if (((arena[i] >> 4) & 0b00000011) == 1 &&
 			(reg_n = recup_val(1, arena, &process->position) < 17))
 		tab[1] = process->reg[reg_n];
 	else if (((arena[i] >> 4) & 0b00000011) == 3)
-		tab[1] = recup_val(3, arena, &process->position);
+		tab[1] = (short)recup_val(3, arena, &process->position);
 	else
 		return (process->carry = 0);
-	arena[(process->position + (tab[0] % IDX_MOD)) % MEM_SIZE] = tab[1];
+	write_hex((process->position + (tab[1] % IDX_MOD)) % MEM_SIZE, arena, tab[0]);
 	process->position = ++process->position % MEM_SIZE;
-	return (process->carry = 1);
+	return (process->carry = tab[1] == 0 ? 1 : 0);
 }

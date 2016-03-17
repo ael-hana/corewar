@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:48:29 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/14 21:11:16 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 17:32:14 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ unsigned int		ld(unsigned char *arena, t_process *process)
 		return (process->carry = 0);
 	process->reg[tab[1]] = tab[0];
 	process->position = ++process->position % MEM_SIZE;
-	return (process->carry = 1);
+	return (tab[0] == 0 ? (process->carry = 1) : (process->carry = 0));
 }

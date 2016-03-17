@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 16:54:45 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/15 16:01:11 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 16:48:52 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ unsigned int		live(unsigned char *arena, t_process *process)
 	len = len << 8;
 	len += arena[++process->position % MEM_SIZE];
 	process->position = ++process->position % MEM_SIZE;
-	process->carry = 1;
 	return (len);
 }

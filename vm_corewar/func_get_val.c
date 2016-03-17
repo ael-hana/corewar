@@ -6,15 +6,15 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:25:48 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/15 18:44:48 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:38:41 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-unsigned int		recup_indir(unsigned char *arena, int *i)
+short				recup_indir(unsigned char *arena, int *i)
 {
-	unsigned int	num;
+	short			num;
 
 	num = arena[++*i % MEM_SIZE];
 	num <<=8;
