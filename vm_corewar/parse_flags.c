@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:20:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/11 19:59:14 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:01:31 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		parse_flags(int ac, char **av, t_env *data)
 	{
 		if (ft_strcmp(av[data->i], "-dump") == 0)
 			get_dump(ac, av, data);
-		else if (ft_strcmp("-n", av[data->i]))
+		else if (ft_strcmp("-n", av[data->i]) == 0)
 			break;
 		else if (av[data->i][0] == '-')
 			print_error(ERR_PARAM);

@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/14 17:33:05 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:08:03 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int		parse_players(int ac, char **av, t_env *data)
 		if (ft_strcmp(av[data->i], "-n") == 0)
 		{
 			n = get_player_number(ac, av, data);
-			data->i++;
+			data->i += 2;
 		}
 		player = create_player(av[data->i]);
 		init_player(player, n);
 		ft_lstpush(&data->player_list, ft_lstnew(player, sizeof(t_header)));
 		data->nb_players++;
-		data->i++;
 		if (data->nb_players > 4)
 			print_error(ERR_PARAM);
+		data->i++;
 	}
 	if (data->nb_players == 0)
 		print_error(ERR_PARAM);

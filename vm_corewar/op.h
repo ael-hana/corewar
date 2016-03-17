@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 15:32:00 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 17:37:26 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct		s_env
 	int				live_last_verif;
 	unsigned char	*arena;
 	int				cycle;
+	int				cycle_to_die;
+	int				cycle_of_last_verif;
 }					t_env;
 
 typedef struct		s_op

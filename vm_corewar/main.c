@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/16 14:39:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:18:25 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_data(t_env *data)
 	data->i = 1;
 	data->cycle = 0;
 	data->nb_players = 0;
+	data->cycle_to_die = CYCLE_TO_DIE;
+	data->cycle_of_last_verif = -1;
 	data->total_live = 0;
 	data->live_last_verif = 0;
 	data->player_list = NULL;
