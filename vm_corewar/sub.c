@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:02:52 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/15 16:04:06 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 17:35:31 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ unsigned int		sub(unsigned char *arena, t_process *process)
 	else
 		return (process->carry = 0);
 	process->position = ++process->position % MEM_SIZE;
-	return (process->carry = 1);
+	return (process->carry = process->reg[st] == 0 ? 1 : 0);
 }
