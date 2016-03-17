@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 17:28:24 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/14 17:50:47 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:49:38 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_process		*create_process(t_process *father_process, int n, int position)
 	if (father_process == NULL)
 	{
 		new_process->cycle = -1;
+		new_process->op = 0;
 		new_process->carry = 0;
 		ft_bzero(new_process->reg, sizeof(int) * 16);
 		new_process->reg[0] = n;
@@ -27,4 +28,20 @@ t_process		*create_process(t_process *father_process, int n, int position)
 		new_process->last_alive = 0;
 	}
 	return (new_process);
+}
+
+void		get_inst(t_process *process, unsigned char *arena)
+{
+	int		i;
+	i = -1;
+	while (op_tab[++i].opcode)
+	{
+		if (op_tab[i].opcode == arena[process->position])
+		{
+			process->cycle = op_tab[i].cycles_nb;
+			process->op = op_tab[i].opcode;
+			return ;
+		}
+	}
+	process->position++;
 }

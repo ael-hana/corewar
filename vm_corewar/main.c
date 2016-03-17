@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/14 17:41:20 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/16 14:39:51 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_data(t_env *data)
 	data->total_live = 0;
 	data->live_last_verif = 0;
 	data->player_list = NULL;
+	data->dump = 2147483647;
 }
 
 int		main(int ac, char **av)
@@ -33,6 +34,6 @@ int		main(int ac, char **av)
 	place_players(&data);
 	print_player_introduction(data.player_list);
 	print_arena(data.arena);
-//	start_game(&data);
+	start_game(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/15 18:44:47 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 15:32:00 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-#include <stdio.h>
+# include <stdio.h>
 
 # include "../libft/libft.h"
 
@@ -75,6 +75,7 @@ typedef char		t_arg_type;
 typedef struct		s_process
 {
 	int				cycle;
+	int				op;
 	int				carry;
 	int				reg[16];
 	int				position;
@@ -119,6 +120,21 @@ typedef struct		s_op
 	int				index; //index = 2 sans = 4
 }					t_op;
 
+extern t_op			op_tab[17];
+
+void			exec_instruction(t_env *data, t_process *process);
+unsigned int	live(unsigned char *arena, t_process *process);
+unsigned int	ld(unsigned char *arena, t_process *process);
+unsigned int	st(unsigned char *arena, t_process *process);
+unsigned int	add(unsigned char *arena, t_process *process);
+unsigned int	sub(unsigned char *arena, t_process *process);
+unsigned int	andd(unsigned char *arena, t_process *process);
+unsigned int	orr(unsigned char *arena, t_process *process);
+unsigned int	xorr(unsigned char *arena, t_process *process);
+unsigned int	zjmp(unsigned char *arena, t_process *process);
+unsigned int	ldi(unsigned char *arena, t_process *process);
+
+void			get_inst(t_process *process, unsigned char *arena);
 t_process		*create_process(t_process *father_process, int n, int position);
 void			start_game(t_env *data);
 void			print_error(char *str);

@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 17:13:50 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/15 18:44:47 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 15:20:42 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned int		and_bitwise(t_process *process, unsigned int *tab)
 	return (process->carry = 1);
 }
 
-unsigned int		and(unsigned char *arena, t_process *process)
+unsigned int		andd(unsigned char *arena, t_process *process)
 {
 	const int		i = ++process->position % MEM_SIZE;
 	int				it;
