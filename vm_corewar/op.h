@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 19:41:20 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 21:35:35 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ unsigned int	orr(unsigned char *arena, t_process *process);
 unsigned int	xorr(unsigned char *arena, t_process *process);
 unsigned int	zjmp(unsigned char *arena, t_process *process);
 unsigned int	ldi(unsigned char *arena, t_process *process);
+void			write_hex(int position, unsigned char *arena, int val);
 
 void			print_info(t_env *data);
 void			get_inst(t_process *process, unsigned char *arena);
@@ -150,7 +151,6 @@ void			place_players(t_env *data);
 t_header		*create_player(char *path);
 void			error_msg(char *str);
 t_header		*check_buf(unsigned char *str, int len);
-void			print_error(char *str);
 int				str_is_digit(char *str);
 int				parse_flags(int ac, char **av, t_env *data);
 int				parse_players(int ac, char **av, t_env *data);
