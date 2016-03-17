@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 15:08:50 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:54:07 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	player_turn(t_env *data, t_header *player)
 		process = process_lst_curs->content;
 		if (process->alive)
 		{
-			if (data->cycle - CYCLE_TO_DIE > process->last_alive)
+			if (data->cycle - data->cycle_to_die > process->last_alive)
 				process->alive = 0;
 			else if (process->cycle == -1)
 				get_inst(process, data->arena);
@@ -59,12 +59,18 @@ void	start_game(t_env *data)
 
 	while (a_player_still_alive(data->player_list) && data->cycle < data->dump)
 	{
+		if (data->cycle - data->cycle_of_last_verif == data->cycle_to_die)
+			data->cycle_of_last_verif = data->cycle;
+		if (data->cycle_of_last_verif == data->cycle)
+			if (data->total_live - data->live_last_verif < NBR_LIVE)
+				data->cycle_to_die -= CYCLE_DELTA;
 		players = data->player_list;
 		while (players)
 		{
 			player = players->content;
-			if (data->cycle - CYCLE_TO_DIE > player->last_alive)
-				player->alive = 0;
+			if (data->cycle_of_last_verif == data->cycle)
+				if (data->cycle - data->cycle_to_die > player->last_alive)
+					player->alive = 0;
 			if (player->alive)
 				player_turn(data, player);
 			players = players->next;

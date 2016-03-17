@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:42:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/16 14:33:24 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 18:55:53 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ unsigned int		prog_size(unsigned char *str, int i)
 	len += str[138];
 	len = len << 8;
 	len += str[139];
-	ft_putnbr(len);
 	!len ? error_msg("ERROR : PROG SIZE\n") : 0;
 	return (len);
 }

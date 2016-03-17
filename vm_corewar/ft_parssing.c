@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:14:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/16 14:34:39 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:25:54 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_header			*create_player(char *path)
 	unsigned char	*str;
 
 	len = 0;
+	ft_printf("|%s|\n", path);
 	if ((fd = open(path, O_RDONLY)) < 0)
 		error_msg("ERROR : CAN'T OPEN FILE.\n");
 	if (!(tmp = malloc(sizeof(unsigned char) * 100)) ||
