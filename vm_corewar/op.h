@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 19:26:43 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 19:41:20 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ unsigned int	xorr(unsigned char *arena, t_process *process);
 unsigned int	zjmp(unsigned char *arena, t_process *process);
 unsigned int	ldi(unsigned char *arena, t_process *process);
 
+void			print_info(t_env *data);
 void			get_inst(t_process *process, unsigned char *arena);
 t_process		*create_process(t_process *father_process, int n, int position);
 void			start_game(t_env *data);
