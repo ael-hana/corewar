@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:16:08 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 19:43:25 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:06:40 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ void	print_info(t_env *data)
 	while (player_list)
 	{
 		player = player_list->content;
-		ft_printf("Player %d : %s is ", player->n, player->prog_name);
-		(player->alive) ? ft_putendl("still alive.") : ft_putendl("is dead");
+		ft_printf("Player %d : %s\n", player->n, player->prog_name);
 		ft_printf("Last alive : %d", player->last_alive, player->alive);
 		player_list = player_list->next;
 	}

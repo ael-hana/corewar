@@ -6,13 +6,28 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 21:33:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:12:27 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-int		a_player_still_alive(t_list *player_list)
+int		player_process_alive(t_list *process_list)
+{
+	t_list		*process_list_i;
+	t_process	*process;
+
+	process_list_i = process_list;
+	while (process_list_i)
+	{
+		process = process_list_i->content;
+		if (process->alive == 1)
+			return (1);
+	}
+	return (0);
+}
+
+int		a_process_still_alive(t_list *player_list)
 {
 	t_list		*players_lst_curs;
 	t_header	*player;
@@ -21,8 +36,7 @@ int		a_player_still_alive(t_list *player_list)
 	while (players_lst_curs)
 	{
 		player = players_lst_curs->content;
-		if (player->alive)
-			return (1);
+		return (player_process_alive(player->process_list));
 		players_lst_curs = players_lst_curs->next;
 	}
 	return (0);
@@ -40,11 +54,18 @@ void	player_turn(t_env *data, t_header *player)
 		if (process->alive)
 		{
 			if (data->cycle - data->cycle_to_die > process->last_alive)
+			{
+				ft_putendl("KILLL PROCESSS");
 				process->alive = 0;
+			}
 			else if (process->cycle == -1)
+			{
 				get_inst(process, data->arena);
+			}
 			else if (process->cycle == 0)
+			{
 				exec_instruction(data, process);
+			}
 			else
 				process->cycle--;
 		}
@@ -57,10 +78,9 @@ void	start_game(t_env *data)
 	t_list		*players;
 	t_header	*player;
 
-	while (a_player_still_alive(data->player_list) && data->cycle < data->dump)
+	while (a_process_still_alive(data->player_list) && data->cycle < data->dump)
 	{
-		int i = 0;
-		while (i++ < 10000000);
+		usleep (5000);
 		ft_printf("\e[1;1H\e[2J");
 		print_arena(data->arena);
 		print_info(data);

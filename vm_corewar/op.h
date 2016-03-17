@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 21:35:35 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 21:40:41 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ unsigned int	orr(unsigned char *arena, t_process *process);
 unsigned int	xorr(unsigned char *arena, t_process *process);
 unsigned int	zjmp(unsigned char *arena, t_process *process);
 unsigned int	ldi(unsigned char *arena, t_process *process);
+unsigned int		sti(unsigned char *arena, t_process *process);
+
 void			write_hex(int position, unsigned char *arena, int val);
 
 void			print_info(t_env *data);
