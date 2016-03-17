@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 18:54:07 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 21:33:51 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ void	start_game(t_env *data)
 
 	while (a_player_still_alive(data->player_list) && data->cycle < data->dump)
 	{
+		int i = 0;
+		while (i++ < 10000000);
+		ft_printf("\e[1;1H\e[2J");
+		print_arena(data->arena);
+		print_info(data);
 		if (data->cycle - data->cycle_of_last_verif == data->cycle_to_die)
 			data->cycle_of_last_verif = data->cycle;
 		if (data->cycle_of_last_verif == data->cycle)
