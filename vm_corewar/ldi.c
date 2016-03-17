@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 17:52:14 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 21:20:52 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:08:35 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ unsigned int		ldi(unsigned char *arena, t_process *process)
 		return (0);
 	process->reg[tab[2]] = arena[(((i - 1) + (tab[0] + tab[1])) % MEM_SIZE)
 		% IDX_MOD];
-	return (process->carry = process->reg[tab[2]] == 0 ? 1 : 0);
+	//return (process->carry = process->reg[tab[2]] == 0 ? 1 : 0);
+	return (0);
 }
