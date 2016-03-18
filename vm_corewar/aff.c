@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   aff.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/14 16:54:45 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/18 02:29:49 by ecousine         ###   ########.fr       */
+/*   Created: 2016/03/18 03:48:17 by ael-hana          #+#    #+#             */
+/*   Updated: 2016/03/18 04:29:40 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-unsigned int		live(unsigned char *arena, t_process *process)
+unsigned int		aff(unsigned char *arena, t_process *process)
 {
-	unsigned int	len;
+	unsigned char	v;
 
+	if (arena[++process->position % MEM_SIZE] != 0b01000000)
+		return (0);
+	if ((v = recup_val(1, arena, &process->position)) < 17)
+		return (0);
 	process->position = ++process->position % MEM_SIZE;
-	len = arena[++process->position % MEM_SIZE];
-	len = len << 8;
-	len += arena[++process->position % MEM_SIZE];
-	len = len << 8;
-	len += arena[++process->position % MEM_SIZE];
-	len = len << 8;
-	len += arena[++process->position % MEM_SIZE];
-	process->position = ++process->position % MEM_SIZE;
-	return (len);
+	v = process->reg[v] % 256;
+	write(1, &v, 1);
+	return (0);
 }

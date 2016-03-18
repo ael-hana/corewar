@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:20:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/17 19:01:31 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 21:24:47 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		parse_flags(int ac, char **av, t_env *data)
 			break;
 		else if (av[data->i][0] == '-')
 			print_error(ERR_PARAM);
+		else
+			break;
 		data->i++;
 	}
 	return (1);

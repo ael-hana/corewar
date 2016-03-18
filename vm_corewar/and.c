@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 17:13:50 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 17:40:44 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/18 04:19:27 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ unsigned int		andd(unsigned char *arena, t_process *process)
 				it != 2 && ((arena[i] >> cmp) & 0b00000011) == 0b10)
 			tab[it] = recup_val(2, arena, &process->position);
 		else if (!(arena[i] & 0b00000011) && ((arena[i] >> cmp) & 0b00000011)
-				== 0b01 && recup_val(1, arena, &process->position) < 17)
-				tab[it] = process->reg[recup_reg_n(arena, &process->position)];
+		== 0b01 && (tab[it] = recup_val(1, arena, &process->position) < 17))
+				tab[it] = process->reg[tab[it]];
 		else
 			return (process->carry = 0);
 		cmp -= 2;
