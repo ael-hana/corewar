@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 23:14:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/18 02:32:40 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ typedef struct		s_op
 
 extern t_op			op_tab[17];
 
-void				exec_instruction(t_env *data, t_process *process);
+void				print_info(t_env *data);
+void				exec_instruction(t_env *data, t_process *process, t_header *p);
 unsigned int		live(unsigned char *arena, t_process *process);
 unsigned int		ld(unsigned char *arena, t_process *process);
 unsigned int		st(unsigned char *arena, t_process *process);
@@ -135,6 +136,9 @@ unsigned int		orr(unsigned char *arena, t_process *process);
 unsigned int		xorr(unsigned char *arena, t_process *process);
 unsigned int		zjmp(unsigned char *arena, t_process *process);
 unsigned int		ldi(unsigned char *arena, t_process *process);
+unsigned int		sti(unsigned char *arena, t_process *process);
+unsigned int		forkk(unsigned char *arena, t_process *proces, t_header *r);
+
 void				write_hex(int position, unsigned char *arena, int val);
 void				get_inst(t_process *process, unsigned char *arena);
 t_process			*create_process(t_process *father_process, int n, int position);
