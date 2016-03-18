@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 17:28:24 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/18 02:03:07 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/18 04:29:38 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_process	*create_process(t_process *father_process, int n, int position)
 	}
 	else
 	{
-		new_process = father_process;
-		new_process->position = (n + position) % IDX_MOD;
+		*new_process = *father_process;
+		new_process->position = ((n + position) % IDX_MOD) % MEM_SIZE;
 	}
 	return (new_process);
 }

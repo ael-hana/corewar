@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 21:21:24 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/18 04:29:38 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_op    op_tab[17] =
 		"load index", 1, 1},											//done
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
 		"store index", 1, 1},											//done
-	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
-	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},						//done
+	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},		//done
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
-		"long load index", 1, 1},
-	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+		"long load index", 1, 1},										//done
+	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},					//done
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},							//done
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };

@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:17:50 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 17:41:33 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/18 04:21:18 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ unsigned int		xorr(unsigned char *arena, t_process *process)
 		else if (it != 2 && ((arena[i] >> cmp) & 0b00000011) == 0b10)
 			tab[it] = recup_val(2, arena, &process->position);
 		else if (((arena[i] >> cmp) & 0b00000011) == 0b01 &&
-			recup_val(1, arena, &process->position) < 17)
-				tab[it] = process->reg[recup_reg_n(arena, &process->position)];
+			(tab[it] = recup_val(1, arena, &process->position) < 17))
+				tab[it] = process->reg[tab[it]];
 		else
 			return (process->carry = 0);
 		cmp -= 2;
