@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 11:28:28 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 14:20:41 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/22 17:56:49 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ int				get_arg_value(unsigned char *arena, t_process *process, int *j, char byte
 {
 	int		value;
 
-
 	if (bytecode == 0b01)
+	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
-	else if (bytecode == 0b10)
+	}
+	else if (bytecode == 0b10 || op_tab[process->op - 1].index == 2)
 	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 	}
-	else if (bytecode == 0b11)
+	else if (0b11 == bytecode)
 	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
@@ -38,9 +39,20 @@ int				get_arg_value(unsigned char *arena, t_process *process, int *j, char byte
 	return (value);
 }
 
+int				bytecode_nb(int bytecode)
+{
+	if (bytecode == 0b01)
+		return (1);
+	else if (bytecode == 0b10)
+		return (2);
+	else if (bytecode == 0b11)
+		return (4);
+	return (0);
+}
+
 int				*get_op_args(unsigned char *arena, t_process *process)
 {
-	int					i;
+	int				i;
 	int				j;
 	int				params_nb;
 	unsigned char	bytecode;
@@ -48,15 +60,15 @@ int				*get_op_args(unsigned char *arena, t_process *process)
 
 	bytecode = arena[(process->position + 1) % MEM_SIZE];
 	if (get_arg_nb(bytecode) != op_tab[process->op - 1].params_nb)
-	{
 		return (NULL);
-	}
 	tab = malloc(sizeof(int) * 3);
 	params_nb = op_tab[process->op -1].params_nb;
 	i = 0;
 	j = 2;
 	while (i < params_nb)
 	{
+		if (!(op_tab[process->op - 1].params_type[i] & bytecode_nb(bytecode >> 6)))
+			return (NULL);
 		tab[i] = get_arg_value(arena, process, &j, bytecode >> 6);
 		bytecode = bytecode << 2;
 		i++;
@@ -72,7 +84,7 @@ int			get_dir_value(unsigned char *are, t_process *process, int *tab)
 
 	i = 0;
 	bytecode = are[(process->position + 1) % MEM_SIZE];
-	params_nb = op_tab[process->op -1].params_nb;
+	params_nb = op_tab[process->op - 1].params_nb;
 	while (i < params_nb)
 	{
 		if (bytecode >> 6 == 0b01)
@@ -97,14 +109,15 @@ void		update_pc_pos(unsigned char *are, t_process *process)
 	i = 0;
 	bytecode = are[(process->position + 1) % MEM_SIZE];
 	params_nb = op_tab[process->op -1].params_nb;
+	process->position = (process->position + 1) % MEM_SIZE;
 	while (i < params_nb)
 	{
 		if (bytecode >> 6 == 0b01)
 			process->position = (process->position + 1) % MEM_SIZE;
-		else if (bytecode >> 6 == 0b10)
-			process->position = (process->position + 2) % MEM_SIZE;
-		else if (bytecode >> 6 == 0b11)
+		else if (bytecode >> 6 == 0b10 || op_tab[process->op -1].params_nb)
 			process->position = (process->position + 4) % MEM_SIZE;
+		else if (bytecode >> 6 == 0b11)
+			process->position = (process->position + 2) % MEM_SIZE;
 		bytecode = bytecode << 2;
 		i++;
 	}

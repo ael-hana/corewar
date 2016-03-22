@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 13:57:37 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/22 16:44:57 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		a_process_still_alive(t_env *data)
 void	process_cycle(t_env *data, t_process *process)
 {
 	ft_printf("[Cycle : %d] Position %d, opcode %d, wait %d\n" , data->cycle, process->position, process->op, process->cycle);
+	getchar();
 	if (process->alive == 0)
 		return ;
 	if (data->cycle - data->cycle_to_die == data->cycle_of_last_verif)
