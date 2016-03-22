@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/17 23:14:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/17 23:16:42 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,6 @@ int					parse_players(int ac, char **av, t_env *data);
 unsigned int		recup_val(int code, unsigned char *arena, int *i);
 unsigned int		recup_reg_n(unsigned char *arena, int *i);
 void				print_player_introduction(t_list *player_list);
+void				print_info(t_env *data);
 
 #endif
