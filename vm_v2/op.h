@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/22 20:04:35 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/22 23:56:50 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int				*get_op_args(unsigned char *arena, t_process *process);
 int				get_arg_nb(char bytecode);
 void			print_info(t_env *data);
 void			exec_instruction(t_env *data, t_process *process);
-unsigned int	live(unsigned char *arena, t_process *process);
+unsigned int	live(t_env *data, t_process *process);
 unsigned int	ld(t_env *data, t_process *process);
 unsigned int	st(unsigned char *arena, t_process *process);
 unsigned int	add(unsigned char *arena, t_process *process);
@@ -154,9 +154,9 @@ unsigned int	xorr(unsigned char *arena, t_process *process);
 unsigned int	zjmp(unsigned char *arena, t_process *process);
 unsigned int	ldi(unsigned char *arena, t_process *process);
 unsigned int	sti(t_env *data, t_process *process);
+unsigned int	aff(t_env *data, t_process *process);
 unsigned int		forkk(unsigned char *arena, t_process *proces, t_header *r);
 unsigned int		lld(unsigned char *arena, t_process *process);
-unsigned int		aff(unsigned char *arena, t_process *process);
 
 void				write_hex(int position, unsigned char *arena, int val);
 void				get_inst(t_process *process, unsigned char *arena);

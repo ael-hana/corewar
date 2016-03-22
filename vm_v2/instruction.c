@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 20:03:48 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/22 20:40:22 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	exec_instruction(t_env *data, t_process *process)
 	if (process->op == 1)
 	{
 		process->last_alive = data->cycle;
-		last_alive(data, live(data->arena, process));
+		last_alive(data, live(data, process));
 	}
 	else if (process->op == 2)
 		ld(data, process);
@@ -58,7 +58,7 @@ void	exec_instruction(t_env *data, t_process *process)
 	else if (process->op == 11)
 		sti(data, process);
 	else if (process->op == 16)
-		aff(data->arena, process);
+		aff(data, process);
 //	else if (process->op == 12)
 //		;
 //		forkk(data->arena, process, player);

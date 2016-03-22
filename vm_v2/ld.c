@@ -6,12 +6,12 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:48:29 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/22 17:56:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/22 23:56:47 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
-
+/*
 unsigned int		ld(t_env *data, t_process *process)
 {
 	unsigned char	*arena;
@@ -34,16 +34,18 @@ unsigned int		ld(t_env *data, t_process *process)
 	update_pc_pos(data->arena, process);
 	return (1);
 }
+*/
 
-/**
-unsigned int		ld(unsigned char *arena, t_process *process)
+unsigned int		ld(t_env *data, t_process *process)
 {
+	unsigned char	*arena;
 	const int		i = ++process->position % MEM_SIZE;
-	int				tab[2];
+	unsigned int	tab[2];
 
-	if (((arena[i] >> 6) & 0b00000011) == 3)
+	arena = data->arena;
+	if (((arena[i] >> 6) & 0b00000011) == 2)
 		tab[0] = recup_val(3, arena, &process->position);
-	else if (((arena[i] >> 6) & 0b00000011) == 2)
+	else if (((arena[i] >> 6) & 0b00000011) == 3)
 		tab[0] = recup_val(2, arena, &process->position);
 	else
 		return (process->carry = 0);
@@ -57,4 +59,4 @@ unsigned int		ld(unsigned char *arena, t_process *process)
 			process->reg[tab[1]]);
 	process->position = ++process->position % MEM_SIZE;
 	return (tab[0] == 0 ? (process->carry = 1) : (process->carry = 0));
-}**/
+}
