@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/18 02:33:28 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/18 03:29:49 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,15 @@ void	player_turn(t_env *data, t_header *player)
 	{
 		process = process_list->content;
 
-		ft_printf("Cycle : %d Alive : %d, opcode : %d, position : %d, wait : %d, carry : %d\n",
-				data->cycle, process->alive, process->op, process->position, process->cycle, process->carry);
+		ft_printf("Cycle : %d lastalive : %d, opcode : %d, position : %d, wait : %d, carry : %d\n",
+				data->cycle, process->last_alive, process->op, process->position, process->cycle, process->carry);
 		if (process->alive == 0)
 			break ;
-		else if (data->cycle - data->cycle_to_die > process->last_alive)
-			process->alive = 0;
+		else if (data->cycle - data->cycle_to_die == data->cycle_of_last_verif)
+		{
+			if (data->cycle - data->cycle_to_die >= process->last_alive)
+				process->alive = 0;
+		}
 		else if (process->cycle == -1)
 			get_inst(process, data->arena);
 		else if (process->cycle == 0)
@@ -78,13 +81,21 @@ void	start_game(t_env *data)
 	while (a_process_still_alive(data->player_list) && data->cycle < data->dump)
 	{
 		player_list = data->player_list;
+
 		while (player_list)
 		{
-			print_arena(data->arena);
+//			print_arena(data->arena);
 			getchar();
 			player = player_list->content;
 			player_turn(data, player);
 			player_list = player_list->next;
+			if (data->cycle - data->cycle_of_last_verif == data->cycle_to_die)
+			{
+				if (data->total_live - data->live_last_verif > NBR_LIVE)
+					data->cycle_to_die -= CYCLE_DELTA;
+				data->cycle_of_last_verif = data->cycle;
+				data->live_last_verif = data->total_live;
+			}
 		}
 		data->cycle++;
 	}

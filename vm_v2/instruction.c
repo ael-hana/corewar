@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/18 03:25:23 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/21 14:47:20 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	last_alive(t_env *data, int id)
 	}
 }
 
-void	exec_instruction(t_env *data, t_process *process, t_header *player)
+void	exec_instruction(t_env *data, t_process *process)
 {
 	if (process->op == 1)
 	{
@@ -57,9 +57,11 @@ void	exec_instruction(t_env *data, t_process *process, t_header *player)
 		ldi(data->arena, process);
 	else if (process->op == 11)
 		sti(data->arena, process);
-	else if (process->op == 12)
-		forkk(data->arena, process, player);
+//	else if (process->op == 12)
+//		;
+//		forkk(data->arena, process, player);
 	else
 		ft_putendl("ERRREUR");
+	process->op = 0;
 	process->cycle = -1;
 }

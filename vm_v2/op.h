@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/18 16:08:48 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/21 23:06:54 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 
 # include "../libft/libft.h"
 
+# define ANSI_COLOR_RED     "\x1b[31m"
+# define ANSI_COLOR_GREEN   "\x1b[32m"
+# define ANSI_COLOR_YELLOW  "\x1b[33m"
+# define ANSI_COLOR_BLUE    "\x1b[34m"
+# define ANSI_COLOR_MAGENTA "\x1b[35m"
+# define ANSI_COLOR_CYAN    "\x1b[36m"
+# define ANSI_COLOR_RESET   "\x1b[0m"
 # define ERR_PARAM "./corewar [-dump nbr_cycles] [[-n number] champion.cor]..\n"
 
 # define IND_SIZE			2
@@ -72,9 +79,23 @@ typedef char		t_arg_type;
 # define COREWAR_EXEC_MAGIC	0xea83f3
 # define READ_SIZE			42
 
+
+typedef struct		s_header
+{
+	unsigned int	magic;
+	char			numb;
+	unsigned short	n;
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int	prog_size;
+	unsigned char	*inst;
+	char			comment[COMMENT_LENGTH + 1];
+	int				alive;
+	int				last_alive;
+}					t_header;
+
 typedef struct		s_process
 {
-	t_header		player;
+	t_header		*player;
 	int				cycle;
 	int				op;
 	int				carry;
@@ -83,19 +104,6 @@ typedef struct		s_process
 	int				alive;
 	int				last_alive;
 }					t_process;
-
-typedef struct		s_header
-{
-	unsigned int	magic;
-	int				n;
-	char			prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int	prog_size;
-	unsigned char	*inst;
-	char			comment[COMMENT_LENGTH + 1];
-	t_list			*process_list;
-	int				alive;
-	int				last_alive;
-}					t_header;
 
 typedef struct		s_env
 {
@@ -107,6 +115,7 @@ typedef struct		s_env
 	int				total_live;
 	int				live_last_verif;
 	unsigned char	*arena;
+	unsigned char	*arena_owner;
 	int				cycle;
 	int				cycle_to_die;
 	int				cycle_of_last_verif;
@@ -127,7 +136,7 @@ typedef struct		s_op
 extern t_op			op_tab[17];
 
 void				print_info(t_env *data);
-void				exec_instruction(t_env *data, t_process *process, t_header *p);
+void				exec_instruction(t_env *data, t_process *process);
 unsigned int		live(unsigned char *arena, t_process *process);
 unsigned int		ld(unsigned char *arena, t_process *process);
 unsigned int		st(unsigned char *arena, t_process *process);
@@ -144,14 +153,14 @@ unsigned int		lld(unsigned char *arena, t_process *process);
 
 void				write_hex(int position, unsigned char *arena, int val);
 void				get_inst(t_process *process, unsigned char *arena);
-t_process			*create_process(t_process *father_process, int n, int position);
+t_process	*create_process(t_process *father_process, t_header *player, int position);
 void				start_game(t_env *data);
 void				print_error(char *str);
 int					str_is_digit(char *str);
 int					parse_flags(int ac, char **av, t_env *data);
 int					parse_players(int ac, char **av, t_env *data);
 void				create_arena(t_env *data);
-void				print_arena(unsigned char *arena);
+void				print_arena(t_env *data);
 void				place_players(t_env *data);
 t_header			*create_player(char *path);
 void				error_msg(char *str);

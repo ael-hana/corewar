@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/18 16:36:42 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/21 23:06:53 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,12 @@ int		get_player_number(int ac, char **av, t_env *data)
 	return (-1);
 }
 
-void	init_player(t_header *player, int n)
+void	init_player(t_env *data, t_header *player, int n)
 {
-	t_process		*process;
-
+	player->numb = data->nb_players + 1;
 	player->alive = 1;
 	player->last_alive = 0;
-	player->n = n;
-	process = create_process(NULL, player->n, -1);
-	ft_lstadd(&player->process_list, ft_lstnew(process, sizeof(t_process)));
+	player->n = 0xFFFF - n;
 }
 
 int		parse_players(int ac, char **av, t_env *data)
@@ -40,7 +37,7 @@ int		parse_players(int ac, char **av, t_env *data)
 	int			n;
 	t_header	*player;
 
-		n = 0;
+	n = 0;
 	while (data->i < ac)
 	{
 		n++;
@@ -50,7 +47,7 @@ int		parse_players(int ac, char **av, t_env *data)
 			data->i += 2;
 		}
 		player = create_player(av[data->i]);
-		init_player(player, n);
+		init_player(data, player, n);
 		ft_lstpush(&data->player_list, ft_lstnew(player, sizeof(t_header)));
 		data->nb_players++;
 		if (data->nb_players > 4)
