@@ -1,8 +1,8 @@
-.name "Blitzkrieg"
-.comment "Ach Ja!"
+.name "DerchStructor"
+.comment "All you motherfuckers are gonna pay. You are the ones who are the ball-lickers. We're gonna fuck your mothers while you watch and cry like little, whiny bitches. We're gonna make you eat our shit, then shit out our shit, and then eat yours shit that's made up of our shit that we made you eat. Then you're all you motherfucks are next. Love, STAE."
 
 #		ld			%0, r1
-#		zjmp		%0
+#		zjmp		%-511
 
 init:
 		sti			r1, %:alive, %1
@@ -17,9 +17,10 @@ init:
 		zjmp		%:alive
 
 initwall:
-		ld			%150994944, r2
+		ld			%42991616, r2
 		ld			%265, r3
-		ld			%0, r16
+		ld			%4261478400, r16
+		ld			%0, r15
 
 wall:
 		live		%1344483
