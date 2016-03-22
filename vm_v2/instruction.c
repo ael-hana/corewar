@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 17:04:34 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/22 20:03:48 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exec_instruction(t_env *data, t_process *process)
 		last_alive(data, live(data->arena, process));
 	}
 	else if (process->op == 2)
-		ld(data->arena, process);
+		ld(data, process);
 	else if (process->op == 3)
 		st(data->arena, process);
 	else if (process->op == 4)
@@ -64,6 +64,7 @@ void	exec_instruction(t_env *data, t_process *process)
 //		forkk(data->arena, process, player);
 	else
 		ft_putendl("ERRREUR");
+	process->position = (process->position + 1) % MEM_SIZE;
 	process->op = 0;
 	process->cycle = -1;
 }
