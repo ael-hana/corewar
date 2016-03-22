@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 20:32:34 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/18 04:14:40 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/22 16:16:21 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void				write_hex(int position, unsigned char *arena, int val)
 	st = 24;
 	while (st >= 0)
 	{
-		arena[position % MEM_SIZE] = (val >> st) & 0x000000FF;
+		arena[position % MEM_SIZE] = ((val >> st) & 0x000000FF);
 		++position;
 		st -= 8;
 	}

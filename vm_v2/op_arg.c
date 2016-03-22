@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 11:28:28 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 14:20:41 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/22 15:18:16 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ int				*get_op_args(unsigned char *arena, t_process *process)
 
 	bytecode = arena[(process->position + 1) % MEM_SIZE];
 	if (get_arg_nb(bytecode) != op_tab[process->op - 1].params_nb)
-	{
 		return (NULL);
-	}
 	tab = malloc(sizeof(int) * 3);
 	params_nb = op_tab[process->op -1].params_nb;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/22 14:20:04 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/22 17:04:31 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ unsigned int	ldi(unsigned char *arena, t_process *process);
 unsigned int	sti(t_env *data, t_process *process);
 unsigned int		forkk(unsigned char *arena, t_process *proces, t_header *r);
 unsigned int		lld(unsigned char *arena, t_process *process);
+unsigned int		aff(unsigned char *arena, t_process *process);
 
 void				write_hex(int position, unsigned char *arena, int val);
 void				get_inst(t_process *process, unsigned char *arena);
