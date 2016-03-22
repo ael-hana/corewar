@@ -145,8 +145,8 @@ int			analyse_file_and_fill_env(t_env *e, int fd)
 		if (!is_good_instru(e, tmp, &byte))
 			return (frees_and_quit(&line, NULL, 0));
 	}
-	e->header.prog_size = byte;
 	e->header.magic = COREWAR_EXEC_MAGIC;
-	ft_memdel((void **)&line);
+	if ((e->header.prog_size = byte) == 0)
+		return (frees_and_quit(&line, NULL, 0));
 	return (frees_and_quit(&line, NULL, ret + 1));
 }
