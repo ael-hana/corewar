@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/23 16:31:54 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/23 18:37:45 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	exec_instruction(t_env *data, t_process *process)
 		ldi(data->arena, process);
 	else if (process->op == 11)
 		sti(data, process);
+	else if (process->op == 15)
+		lfork(data, process);
 	else if (process->op == 16)
 		aff(data, process);
 //	else if (process->op == 12)

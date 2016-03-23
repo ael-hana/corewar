@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:41:36 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/11 17:42:20 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/23 19:33:44 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	print_error(char *str)
 {
 	ft_putstr_fd(str, 2);
-	exit (-1);
+	exit(-1);
 }

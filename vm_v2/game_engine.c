@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/13 14:18:57 by ecousine          #+#    #+#             */
+/*   Created: 2016/03/23 18:44:51 by ael-hana          #+#    #+#             */
+/*   Updated: 2016/03/23 19:23:50 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +30,8 @@ int		a_process_still_alive(t_env *data)
 
 void	process_cycle(t_env *data, t_process *process)
 {
-	ft_printf("[Cycle : %d] Position %d, opcode %d, wait %d\n" , data->cycle, process->position, process->op, process->cycle);
+	ft_printf("[Cycle : %d] Position %d, opcode %d, wait %d\n",
+			data->cycle, process->position, process->op, process->cycle);
 	getchar();
 	if (process->alive == 0)
 		return ;
