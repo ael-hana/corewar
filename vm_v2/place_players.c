@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 18:33:20 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/21 15:47:39 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:08:52 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	place_player(t_env *data, int start, t_header *player)
 {
-	int		i;
+	unsigned int		i;
 
 	i = 0;
 	while (i < player->prog_size)

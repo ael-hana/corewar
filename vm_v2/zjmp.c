@@ -6,17 +6,23 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:44:54 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 18:58:18 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 15:44:57 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-unsigned int		zjmp(unsigned char *arena, t_process *process)
+unsigned int		zjmp(t_env *data, t_process *process)
 {
-	if (!process->carry)
+	int				index;
+	unsigned char	*arena;
+
+	arena = data->arena;
+	if (process->carry == 0)
 		return (0);
-	process->position = ((process->position - 4) +
-		((short)recup_val(2, arena, &process->position) % IDX_MOD)) % MEM_SIZE;
+	index = arena[(process->position + 1) % MEM_SIZE];
+	index = index << 8;
+	index += arena[(process->position + 2) % MEM_SIZE];
+	process->position += (index % IDX_MOD) - 1;
 	return (1);
 }

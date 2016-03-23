@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/22 23:56:49 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 16:35:40 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 t_op    op_tab[17] =
 {
 	//ind = 11 dir = 10 reg = 01 
-	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0}, // CHECK 
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},//done
-	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},//done
-	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},//done
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},//done
+	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0}, // OK - Eloi Approved
+	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},// OK
+	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},// OK
+	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},// OK
+	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},// OK
 	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6,
-		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},							//done
+		"et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},							// OK
 	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6,
-		"ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},						//done
+		"ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},						// OK
 	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6,
-		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},					//done
-	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1}, //carry 1 done
+		"ou (xor  r1, r2, r3   r1^r2 -> r3", 1, 0},					// OK
+	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1}, // OK
 	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 		"load index", 1, 1},											//done
 	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,

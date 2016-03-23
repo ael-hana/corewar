@@ -6,13 +6,13 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 20:40:22 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 16:31:54 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-void	last_alive(t_env *data, int id)
+void	last_alive(t_env *data, unsigned int id)
 {
 	t_list		*players;
 	t_header	*player;
@@ -21,7 +21,7 @@ void	last_alive(t_env *data, int id)
 	while (players)
 	{
 		player = players->content;
-		if (0xFFFFFFFF - player->n == id)
+		if (0xFFFFFFFF - (player->n - 1) == id)
 		{
 			data->total_live++;
 			player->last_alive = data->cycle;
@@ -40,19 +40,19 @@ void	exec_instruction(t_env *data, t_process *process)
 	else if (process->op == 2)
 		ld(data, process);
 	else if (process->op == 3)
-		st(data->arena, process);
+		st(data, process);
 	else if (process->op == 4)
-		add(data->arena, process);
+		add(data, process);
 	else if (process->op == 5)
-		sub(data->arena, process);
+		sub(data, process);
 	else if (process->op == 6)
-		andd(data->arena, process);
+		andd(data, process);
 	else if (process->op == 7)
-		orr(data->arena, process);
+		orr(data, process);
 	else if (process->op == 8)
-		xorr(data->arena, process);
+		xorr(data, process);
 	else if (process->op == 9)
-		zjmp(data->arena, process);
+		zjmp(data, process);
 	else if (process->op == 10)
 		ldi(data->arena, process);
 	else if (process->op == 11)

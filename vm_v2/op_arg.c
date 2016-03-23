@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 11:28:28 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 20:04:52 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 15:41:36 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,26 @@ int				get_arg_value(unsigned char *arena, t_process *process, int *j, char byte
 {
 	int		value;
 
+	value = 0;
 	if (bytecode == 0b01)
 	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 	}
-	else if (bytecode == 0b10 || op_tab[process->op - 1].index == 2)
+	else if (bytecode == 0b11 || op_tab[process->op - 1].index == 1)
 	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
-		value = arena[(process->position + (*j)++) % MEM_SIZE];
+		value += arena[(process->position + (*j)++) % MEM_SIZE];
 	}
-	else if (0b11 == bytecode)
+	else if (0b10 == bytecode)
 	{
 		value = arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
-		value = arena[(process->position + (*j)++) % MEM_SIZE];
+		value += arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
-		value = arena[(process->position + (*j)++) % MEM_SIZE];
+		value += arena[(process->position + (*j)++) % MEM_SIZE];
 		value = value << 8;
-		value = arena[(process->position + (*j)++) % MEM_SIZE];
+		value += arena[(process->position + (*j)++) % MEM_SIZE];
 	}
 	return (value);
 }
@@ -59,6 +60,7 @@ int				*get_op_args(unsigned char *arena, t_process *process)
 	int				*tab;
 
 	bytecode = arena[(process->position + 1) % MEM_SIZE];
+	ft_printf("bytecode : %#x\n", bytecode);
 	if (get_arg_nb(bytecode) != op_tab[process->op - 1].params_nb)
 		return (NULL);
 	tab = malloc(sizeof(int) * 3);
@@ -67,6 +69,7 @@ int				*get_op_args(unsigned char *arena, t_process *process)
 	j = 2;
 	while (i < params_nb)
 	{
+		ft_printf("first value : %#x\n", bytecode >> 6);
 		if (!(op_tab[process->op - 1].params_type[i] & bytecode_nb(bytecode >> 6)))
 			return (NULL);
 		tab[i] = get_arg_value(arena, process, &j, bytecode >> 6);
@@ -81,6 +84,7 @@ int			get_dir_value(unsigned char *are, t_process *process, int *tab)
 	int		i;
 	unsigned char	bytecode;
 	int		params_nb;
+
 
 	i = 0;
 	bytecode = are[(process->position + 1) % MEM_SIZE];
@@ -108,16 +112,25 @@ void		update_pc_pos(unsigned char *are, t_process *process)
 
 	i = 0;
 	bytecode = are[(process->position + 1) % MEM_SIZE];
-	params_nb = op_tab[process->op -1].params_nb;
+	params_nb = op_tab[process->op - 1].params_nb;
 	process->position = (process->position + 1) % MEM_SIZE;
 	while (i < params_nb)
 	{
 		if (bytecode >> 6 == 0b01)
+		{
+			ft_putendl("pos + 1");
 			process->position = (process->position + 1) % MEM_SIZE;
-		else if (bytecode >> 6 == 0b10 || op_tab[process->op -1].params_nb)
-			process->position = (process->position + 4) % MEM_SIZE;
-		else if (bytecode >> 6 == 0b11)
+		}
+		else if (bytecode >> 6 == 0b11 || op_tab[process->op - 1].index == 1)
+		{
+			ft_putendl("pos + 2");
 			process->position = (process->position + 2) % MEM_SIZE;
+		}
+		else if (bytecode >> 6 == 0b10)
+		{
+			ft_putendl("pos + 4");
+			process->position = (process->position + 4) % MEM_SIZE;
+		}
 		bytecode = bytecode << 2;
 		i++;
 	}

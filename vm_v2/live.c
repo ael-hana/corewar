@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 16:54:45 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/22 20:40:32 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:24:14 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ unsigned int		live(t_env *data, t_process *process)
 	unsigned char	*arena;
 	unsigned int	len;
 
+	ft_printf("Begin of LIVE\n");
 	arena = data->arena;
-	process->position = ++process->position % MEM_SIZE;
 	len = arena[++process->position % MEM_SIZE];
 	len = len << 8;
 	len += arena[++process->position % MEM_SIZE];
@@ -26,5 +26,7 @@ unsigned int		live(t_env *data, t_process *process)
 	len += arena[++process->position % MEM_SIZE];
 	len = len << 8;
 	len += arena[++process->position % MEM_SIZE];
+	ft_printf("Live for %#x\n", len);
+	ft_printf("End of LIVE\n");
 	return (len);
 }
