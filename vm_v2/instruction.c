@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 15:50:18 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/23 16:31:54 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/23 19:29:39 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,19 @@ void	exec_instruction(t_env *data, t_process *process)
 	else if (process->op == 9)
 		zjmp(data, process);
 	else if (process->op == 10)
-		ldi(data->arena, process);
+		ldi(data, process);
 	else if (process->op == 11)
 		sti(data, process);
+	else if (process->op == 12)
+		forkk(data, process);
+	else if (process->op == 13)
+		lld(data, process);
+	else if (process->op == 14)
+		lldi(data, process);
+	else if (process->op == 15)
+		lforkk(data, process);
 	else if (process->op == 16)
 		aff(data, process);
-//	else if (process->op == 12)
-//		;
-//		forkk(data->arena, process, player);
-	else
-		ft_putendl("ERRREUR");
 	process->position = (process->position + 1) % MEM_SIZE;
 	process->op = 0;
 	process->cycle = -1;

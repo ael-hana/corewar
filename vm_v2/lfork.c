@@ -6,26 +6,31 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 03:34:12 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/18 03:44:35 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 19:28:21 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-unsigned int		lfork(unsigned char *arena, t_process *process, t_header *r)
+unsigned int		lforkk(t_env *data, t_process *process)
 {
-	t_list			*tmp;
-	t_process		*ptr;
-	int				ok;
+	t_process		*new_process;
+	int				index;
+	unsigned char	*arena;
 
-	if (!(ptr = malloc(sizeof(t_process))))
-		error_msg("CAN'T MALLOC\n");
-	*ptr = *process;
-	ok = process->position;
-	ptr->position = (ok + recup_val(3, arena, &process->position)) % MEM_SIZE;
-	if (!(tmp = ft_lstnew(ptr, sizeof(t_process))))
-		error_msg("CAN'T MALLOC\n");
-	ft_lstadd(&r->process_list, tmp);
-	process->position = ++process->position % MEM_SIZE;
-	return (0);
+	arena = data->arena;
+	if (process->carry == 0)
+		return (0);
+	index = arena[(process->position + 1) % MEM_SIZE];
+	index = index << 8;
+	index += arena[(process->position + 2) % MEM_SIZE];
+	index = index << 8;
+	index += arena[(process->position + 2) % MEM_SIZE];
+	index = index << 8;
+	index += arena[(process->position + 2) % MEM_SIZE];
+	index = (process->position + index) % MEM_SIZE;
+	new_process = create_process(process, process->player, index);
+	ft_lstadd(&data->process_list, ft_lstnew(new_process, sizeof(t_process)));
+	process->position = (process->position + 4) % MEM_SIZE;
+	return (1);
 }

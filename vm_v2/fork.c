@@ -6,22 +6,28 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:51:24 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/18 03:34:40 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/24 01:29:15 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-unsigned int		forkk(unsigned char *arena, t_process *process, t_header *r)
+unsigned int		forkk(t_env *data, t_process *process)
 {
-	t_list			*tmp;
-	int				ok;
+	t_process		*new_process;
+	short			index;
+	unsigned char	*arena;
 
-	ok = process->position;
-	if (!(tmp = ft_lstnew(create_process(process, ok, recup_val(3, arena,
-	&process->position)), sizeof(t_process))))
-		error_msg("CAN'T MALLOC\n");
-	ft_lstadd(&r->process_list, tmp);
-	process->position = ++process->position % MEM_SIZE;
-	return (0);
+	ft_printf("Start of FORK\n");
+	arena = data->arena;
+	index = arena[(process->position + 1) % MEM_SIZE];
+	index = index << 8;
+	index += arena[(process->position + 2) % MEM_SIZE];
+	index = ((index % IDX_MOD)+ process->position);
+	new_process = create_process(process, process->player, index);
+	ft_lstadd(&data->process_list, ft_lstnew(new_process, sizeof(t_process)));
+	process->position = (process->position + 2) % MEM_SIZE;
+	ft_printf("Position of new process : %d\n", index);
+	ft_printf("End of fork\n");
+	return (1);
 }

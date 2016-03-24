@@ -6,23 +6,33 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:10:11 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/22 14:11:02 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 01:55:00 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
+int mod(int a, int b)
+{
+	int r = a % b;
+
+	return (r < 0 ? r + b : r);
+}
+
 void	write_arena(t_env *data, t_process *pc, int pos, int value)
 {
 	int			i;
 	t_header	*player;
+	int			index;
 
 	player = pc->player;
 	i = 0;
+	index = mod(pc->position + pos, MEM_SIZE);
+	ft_printf("Write : %#x at %d\n", value, index % MEM_SIZE);
 	while (i < 4)
 	{
-		data->arena[(pc->position + pos + i) % MEM_SIZE] = value >> 24;
-		data->arena_owner[(pc->position + pos + i) % MEM_SIZE] = player->numb;
+		data->arena[(index + i) % MEM_SIZE] = value >> 24;
+		data->arena_owner[(index + i) % MEM_SIZE] = player->numb;
 		value = value << 8;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/23 15:42:43 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 03:50:27 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct		s_op
 
 extern t_op			op_tab[17];
 
+int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc);
 void			update_pc_pos(unsigned char *are, t_process *process);
 void			write_arena(t_env *data, t_process *pc, int pos, int value);
 int				get_dir_value(unsigned char *are, t_process *process, int *tab);
@@ -152,12 +153,15 @@ unsigned int	andd(t_env *data, t_process *process);
 unsigned int	orr(t_env *data, t_process *process);
 unsigned int	xorr(t_env *data, t_process *process);
 unsigned int	zjmp(t_env *data, t_process *process);
-unsigned int	ldi(unsigned char *arena, t_process *process);
+unsigned int	ldi(t_env *data, t_process *process);
 unsigned int	sti(t_env *data, t_process *process);
 unsigned int	aff(t_env *data, t_process *process);
-unsigned int	forkk(unsigned char *arena, t_process *proces, t_header *r);
-unsigned int	lld(unsigned char *arena, t_process *process);
+unsigned int	forkk(t_env *data, t_process *process);
+unsigned int	lld(t_env *data, t_process *process);
+unsigned int	lldi(t_env *data, t_process *process);
+unsigned int	lforkk(t_env *data, t_process *process);
 
+int		get_ind_value(unsigned char *are, t_process *process, int *tab, int id);
 void			write_hex(int position, unsigned char *arena, int val);
 void			get_inst(t_process *process, unsigned char *arena);
 t_process		*create_process(t_process *father_process, t_header *player, 

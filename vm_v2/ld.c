@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:48:29 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/23 14:57:25 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 03:51:18 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ unsigned int		ld(t_env *data, t_process *process)
 	unsigned char	*arena;
 	int				*tab;
 
-	ft_printf("Start of LD\n");
+	ft_printf("Begin of LD\n");
 	arena = data->arena;
 	if ((tab = get_op_args(arena, process)) == NULL)
+		return (update_pc_pos_on_failure(arena, process));
+	ft_printf("Board : Arg 1 : %#x, Arg 2 : %#x\n", tab[0], tab[1]);
+	if (get_ind_value(arena, process, tab, 1) == 0)
 		return (0);
-	ft_printf("Arg 1 : %#x, Arg 2 : %#x\n", tab[0], tab[1]);
+	ft_printf("Ind   : Arg 1 : %#x, Arg 2 : %#x\n", tab[0], tab[1]);
 	if (tab[1] >= 1 && tab[1] <= 16)
 	{
 		process->reg[tab[1] - 1] = tab[0];
@@ -32,7 +35,7 @@ unsigned int		ld(t_env *data, t_process *process)
 	}
 	else
 		return (0);
-	ft_printf("Reg 2 : %#x\n", process->reg[1]);
+	ft_printf("Reg %d : %#x\n", tab[1], process->reg[tab[1] - 1]);
 	update_pc_pos(data->arena, process);
 	ft_printf("End of LD\n");
 	return (1);

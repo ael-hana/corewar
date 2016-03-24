@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:16:08 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/21 16:07:23 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 07:15:51 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	print_arena(t_env *data)
 		if (i % 64 == 0)
 			ft_putchar('\n');
 	}
+	ft_printf(ANSI_COLOR_RESET);
 }
 
 void	print_info(t_env *data)
@@ -59,15 +60,15 @@ void	print_info(t_env *data)
 	t_header	*player;
 
 	ft_printf("========= GAME INFOS =========\n");
-	ft_printf("Cycle : %d\n", data->cycle);
-	ft_printf("CYCLE_TO_DIE : %d\n", data->cycle_to_die);
+	ft_printf("Cycle : %d       ", data->cycle);
+	ft_printf("CYCLE_TO_DIE : %d      ", data->cycle_to_die);
 	ft_printf("CYCLE_DELTA : %d\n\n", CYCLE_DELTA);
 	ft_printf("======= PLAYERS INFOS ========\n");
 	player_list = data->player_list;
 	while (player_list)
 	{
 		player = player_list->content;
-		ft_printf("Player %d : %s\n", player->n, player->prog_name);
+		ft_printf("Player %d : %s    ", player->n, player->prog_name);
 		ft_printf("Last alive : %d\n", player->last_alive, player->alive);
 		player_list = player_list->next;
 	}
