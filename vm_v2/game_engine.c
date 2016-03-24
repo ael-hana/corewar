@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 18:44:51 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/24 07:34:29 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 08:17:28 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	start_game(t_env *data)
 			data->cycle_of_last_verif = data->cycle;
 			data->live_last_verif = data->total_live;
 		}
-		if (data->cycle % 250 == 0)
+		if (data->cycle % 1000 == 0)
 		{
 			print_arena(data);
 			print_info(data);

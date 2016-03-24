@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 11:28:28 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/24 04:06:22 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 08:29:36 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int				*get_op_args(unsigned char *arena, t_process *process)
 		return (NULL);
 	}
 	tab = malloc(sizeof(int) * 3);
-	params_nb = op_tab[process->op -1].params_nb;
+	ft_bzero(tab, sizeof(int) * 3);
+	params_nb = op_tab[process->op - 1].params_nb;
 	i = 0;
 	j = 2;
 	while (i < params_nb)

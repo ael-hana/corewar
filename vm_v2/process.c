@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 17:28:24 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/23 22:11:10 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 08:23:47 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_process	*create_process(t_process *father_process, t_header *player, int posit
 void		get_inst(t_process *process, unsigned char *arena)
 {
 	int		i;
+
 	i = -1;
 	while (op_tab[++i].opcode)
 	{

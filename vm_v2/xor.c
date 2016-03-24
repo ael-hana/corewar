@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:17:50 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/23 15:36:19 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 08:39:35 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ unsigned int		xorr(t_env *data, t_process *process)
 	ft_printf("Start of XOR\n");
 	arena = data->arena;
 	if ((tab = get_op_args(arena, process)) == NULL)
-		return (0);
+		return (update_pc_pos_on_failure(arena, process));
 	reg_dest = tab[2];
 	ft_printf("Arg 1 : %d, Arg 2 : %d, Arg 3 : %d\n", tab[0], tab[1], tab[2]);
 	if (get_dir_value(arena, process, tab) == 0)
-		return (0);
+		return (update_pc_pos_on_failure(arena, process));
 	ft_printf("Arg 1 : %d, Arg 2 : %d, Arg 3 : %d\n", tab[0], tab[1], tab[2]);
+
+	if (get_ind_value(data->arena, process, tab, 1) == 0)
+		return (update_pc_pos_on_failure(arena, process));
+
 	if (reg_dest >= 1 && reg_dest <= 16)
 	{
 		process->reg[reg_dest - 1] = tab[0] ^ tab[1];
@@ -35,6 +39,8 @@ unsigned int		xorr(t_env *data, t_process *process)
 		else
 			process->carry = 0;
 	}
+	else
+		return (update_pc_pos_on_failure(arena, process));
 	update_pc_pos(data->arena, process);
 	ft_printf("End of XOR\n");
 	return (1);

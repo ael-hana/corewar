@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:48:29 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/24 07:33:45 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/24 08:35:23 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int		ld(t_env *data, t_process *process)
 		return (update_pc_pos_on_failure(arena, process));
 	ft_printf("Board : Arg 1 : %#x, Arg 2 : %#x\n", tab[0], tab[1]);
 	if (get_ind_value(arena, process, tab, 1) == 0)
-		return (0);
+		return (update_pc_pos_on_failure(arena, process));
 	ft_printf("Ind   : Arg 1 : %#x, Arg 2 : %#x\n", tab[0], tab[1]);
 	if (tab[1] >= 1 && tab[1] <= 16)
 	{
@@ -34,7 +34,7 @@ unsigned int		ld(t_env *data, t_process *process)
 			process->carry = 0;
 	}
 	else
-		return (0);
+		return (update_pc_pos_on_failure(arena, process));
 	ft_printf("Reg %d : %#x\n", tab[1], process->reg[tab[1] - 1]);
 	update_pc_pos(data->arena, process);
 	ft_printf("End of LD\n");
