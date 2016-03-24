@@ -6,19 +6,18 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 19:25:48 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/22 23:56:46 by ael-hana         ###   ########.fr       */
+/*   Updated: 2016/03/23 18:43:59 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-//sans pourcent
 short				recup_indir(unsigned char *arena, int *i)
 {
 	short			num;
 
 	num = arena[++*i % MEM_SIZE];
-	num <<=8;
+	num <<= 8;
 	num += arena[++*i % MEM_SIZE];
 	*i %= MEM_SIZE;
 	return (num);
@@ -29,11 +28,11 @@ unsigned int		recup_dir(unsigned char *arena, int *i)
 	unsigned int	num;
 
 	num = arena[++*i % MEM_SIZE];
-	num <<=8;
+	num <<= 8;
 	num += arena[++*i % MEM_SIZE];
-	num <<=8;
+	num <<= 8;
 	num += arena[++*i % MEM_SIZE];
-	num <<=8;
+	num <<= 8;
 	num += arena[++*i % MEM_SIZE];
 	*i %= MEM_SIZE;
 	return (num);

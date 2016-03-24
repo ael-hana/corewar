@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:14:19 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/17 19:25:54 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/23 18:43:08 by ael-hana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_header			*create_player(char *path)
 		len += i;
 	}
 	free(tmp);
-//	len > (MEM_SIZE / 6) ? error_msg("CHAMP TO LARGE\n") : 0;
 	tmp = check_buf(str, len);
 	free(str);
 	return (tmp);
