@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 18:44:51 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/28 01:04:50 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 21:39:23 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int		a_process_still_alive(t_env *data)
 
 void	process_cycle(t_env *data, t_process *process)
 {
-//	ft_printf("[Cycle : %d] Owner %d, Carry = %d ,Position %d, opcode %d, wait %d\n", data->cycle, process->player->numb, process->carry,  process->position, process->op, process->cycle);
 	if (process->alive == 0)
 		return ;
 	if (data->cycle - data->cycle_to_die == data->cycle_of_last_verif)
@@ -71,7 +70,7 @@ void	start_game(t_env *data)
 			ft_printf("\e[1;1H\e[2J");
 			print_arena(data);
 			print_info(data);
-			sleep(1);
+			usleep(25000);
 		}
 		data->cycle++;
 	}

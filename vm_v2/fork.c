@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 21:51:24 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/28 00:49:43 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 16:00:28 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ unsigned int		forkk(t_env *data, t_process *process)
 	index = arena[(process->position + 1) % MEM_SIZE];
 	index = index << 8;
 	index += arena[(process->position + 2) % MEM_SIZE];
-	index = ((index % IDX_MOD)+ process->position);
+	index = ((index % IDX_MOD) + process->position);
 	new_process = create_process(process, process->player, index);
 	ft_lstadd(&data->process_list, ft_lstnew(new_process, sizeof(t_process)));
 	process->position = (process->position + 2) % MEM_SIZE;

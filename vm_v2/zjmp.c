@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:44:54 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/28 00:48:54 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 16:18:31 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ unsigned int		zjmp(t_env *data, t_process *process)
 	short			index;
 	unsigned char	*arena;
 
-	if (data->debug)
-		ft_printf("begin of ZJMP\n");
 	arena = data->arena;
 	if (process->carry == 0)
 		return (0);
@@ -26,9 +24,5 @@ unsigned int		zjmp(t_env *data, t_process *process)
 	index = index << 8;
 	index += arena[(process->position + 2) % MEM_SIZE];
 	process->position += (index % IDX_MOD) - 1;
-	if (data->debug)
-		ft_printf("new process position : %d\n", process->position);
-	if (data->debug)
-		ft_printf("End of ZJMPP\n");
 	return (1);
 }
