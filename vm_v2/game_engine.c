@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 18:44:51 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/24 08:17:28 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 01:04:50 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	start_game(t_env *data)
 			data->cycle_to_die > 0)
 	{
 		process_list = data->process_list;
-//		print_arena(data);
-//		print_info(data);
 		while (process_list)
 		{
 			process = process_list->content;
@@ -68,8 +66,9 @@ void	start_game(t_env *data)
 			data->cycle_of_last_verif = data->cycle;
 			data->live_last_verif = data->total_live;
 		}
-		if (data->cycle % 1000 == 0)
+		if (data->visual && data->cycle % data->cycle_per_sec == 0)
 		{
+			ft_printf("\e[1;1H\e[2J");
 			print_arena(data);
 			print_info(data);
 			sleep(1);

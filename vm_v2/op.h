@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2016/03/24 07:32:03 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 00:32:13 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ typedef struct		s_env
 	int				cycle;
 	int				cycle_to_die;
 	int				cycle_of_last_verif;
+	int				visual;
+	int				cycle_per_sec;
+	int				debug;
 }					t_env;
 
 typedef struct		s_op

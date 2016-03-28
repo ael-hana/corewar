@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 03:31:51 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/24 08:45:04 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 00:50:20 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@ unsigned int		lldi(t_env *data, t_process *process)
 	int				index;
 	int				reg_dest;
 
+	if (data->debug)
 	ft_printf("Start of LLDI\n");
 	arena = data->arena;
 	if ((tab = get_op_args(arena, process)) == NULL)
 		return (update_pc_pos_on_failure(arena, process));
 	reg_dest = tab[2];
+	if (data->debug)
 	ft_printf("Arg 1 : %#x, Arg 2 : %#x\n Arg 3 : %#x\n", tab[0], tab[1]);
 	if (get_dir_value(arena, process, tab) == 0)
 		return (update_pc_pos_on_failure(arena, process));
+	if (data->debug)
 	ft_printf("Arg 1 : %#x, Arg 2 : %#x\n Arg 3 : %#x\n", tab[0], tab[1]);
 
 	if (get_ind_value(data->arena, process, tab, 1) == 0)
@@ -52,6 +55,7 @@ unsigned int		lldi(t_env *data, t_process *process)
 	else
 		return (update_pc_pos_on_failure(arena, process));
 	update_pc_pos(data->arena, process);
+	if (data->debug)
 	ft_printf("End of LLDI\n");
 	return (1);
 }

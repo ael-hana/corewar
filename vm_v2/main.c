@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/24 08:13:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 00:34:44 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	init_data(t_env *data)
 	data->cycle = 0;
 	data->cycle_to_die = CYCLE_TO_DIE;
 	data->live_last_verif = 0;
+	data->visual = 0;
+	data->cycle_per_sec = 100;
+	data->debug = 0;
 }
 
 int		main(int ac, char **av)

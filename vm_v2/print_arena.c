@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:16:08 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/24 07:15:51 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/28 00:37:49 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_info(t_env *data)
 	ft_printf("========= GAME INFOS =========\n");
 	ft_printf("Cycle : %d       ", data->cycle);
 	ft_printf("CYCLE_TO_DIE : %d      ", data->cycle_to_die);
-	ft_printf("CYCLE_DELTA : %d\n\n", CYCLE_DELTA);
+	ft_printf("CYCLE_DELTA : %d  Cycle par seconde : %d\n\n", CYCLE_DELTA, data->cycle_per_sec);
 	ft_printf("======= PLAYERS INFOS ========\n");
 	player_list = data->player_list;
 	while (player_list)
