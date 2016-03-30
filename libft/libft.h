@@ -22,7 +22,7 @@
 */
 # define GNL_BUFF_SIZE			32
 # define MAX_NB_FD				256
-# define FT_ABS( x )				( ( (x) < 0 ) ? -(x) : (x) )
+# define FT_ABS( x )			( ( (x) < 0 ) ? -(x) : (x) )
 # define FT_MIN( a, b )			( ( (a) < (b) ) ? (a) : (b) )
 # define FT_MAX( a, b )			( ( (a) < (b) ) ? (b) : (a) )
 # define FT_SWAP( a, b, type )	{ type c = (a); (a) = (b); (b) = c; }
@@ -80,9 +80,13 @@ typedef struct			s_fract
 */
 int						ft_printf(char *fmt, ...);
 int						ft_gnl(int const fd, char **line);
+int						ft_printf_fd(int fd, char *fmt, ...);
+int						ft_sprintf(char **buf, char *fmt, ...);
 int						ft_gnlmulti(int const fd, char **line);
 unsigned int			ft_pgcd(unsigned int a, unsigned int b);
 unsigned int			ft_ppcm(unsigned int a, unsigned int b);
+char					**ft_unixcmd_parser(int ac, char **av, char *opts,
+						char *flags);
 
 /*
 ** Fractions **
@@ -175,6 +179,7 @@ void					ft_putendl_fd(char const *s, int fd);
 /*
 ** Tab **
 */
+void					ft_tabdel(void ***as);
 void					ft_tabclr(void *array, size_t size);
 void					ft_tabset(void *tab, void *val, size_t tab_size,
 						size_t content_size);

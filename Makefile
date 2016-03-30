@@ -6,36 +6,36 @@
 #    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/14 15:29:40 by tle-meur          #+#    #+#              #
-#    Updated: 2016/03/30 16:34:45 by tle-meur         ###   ########.fr        #
+#    Updated: 2016/03/30 16:36:02 by tle-meur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	asm
+all		:	asm corewar
 
-FLAGS	=	-Wall -Wextra -Werror
+asm		:
+			@make -C libft/
+			@make -C compilo/
+			@echo "asm created"
+			@mv compilo/asm .
 
-SRCS	=	srcs/op.c srcs/main.c srcs/compute.c srcs/lst_funcs.c \
-			srcs/utilities.c \
-			srcs/checks/read_file.c srcs/checks/check_instru.c \
-			srcs/checks/check_arg.c \
-			srcs/fill/compilo.c srcs/fill/write_in_file.c \
-			srcs/fill/write_steps.c
+corewar	:
+			@make -C libft/
+			@make -C vm/
+			@echo "corewar created"
+			@mv vm/corewar .
 
-OBJS	=	$(SRCS:.c=.o)
-
-all		:	$(NAME)
-
-%.o		:	%.c
-			@gcc $(FLAGS) -o $@ -c $< -I includes/ -I ../libft/
-
-$(NAME)	:	$(OBJS)
-			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
 clean	:
-			@rm -f $(OBJS)
+			@make -C vm/ clean
+			@make -C libft/ clean
+			@make -C compilo/ clean
+			@echo "objects deleted"
 
 fclean	:	clean
-			@rm -f $(NAME)
+			@make -C vm/ fclean
+			@make -C libft/ fclean
+			@make -C compilo/ fclean
+			@echo "libft.a, asm and corewar deleted"
 
-re		:	fclean $(NAME)
+re		:	fclean all
 
-.PHONY	:	all clean fclean re
+.PHONY	:	all asm corewar clean fclean re
