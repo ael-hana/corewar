@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:58:56 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 15:02:44 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 17:31:21 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,20 @@ int		get_player_number(int ac, char **av, t_env *data)
 
 void	init_player(t_env *data, t_header *player, int n)
 {
+	t_list		*player_list;
+	t_header	*cplayer;
+
 	player->numb = data->nb_players + 1;
 	player->alive = 1;
 	player->last_alive = 0;
+	player_list = data->player_list;
+	while (player_list)
+	{
+		cplayer = player_list->content;
+		if (cplayer->n == n)
+			print_error(ERR_PARAM);
+		player_list = player_list->next;
+	}
 	player->n = n;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:16:08 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 14:59:33 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 17:27:37 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	print_player_introduction(t_list *player_list)
 	t_header	*player;
 
 	current_player = player_list;
+	ft_printf("Introducing contestants...\n");
 	while (current_player)
 	{
 		player = current_player->content;
@@ -53,6 +54,30 @@ void	print_arena(t_env *data)
 			ft_putchar('\n');
 	}
 	ft_printf(ANSI_COLOR_RESET);
+}
+
+void	print_winner(t_env *data)
+{
+	int			last_alive;
+	t_list		*player_list;
+	t_header	*player;
+	char		*winner;
+	int			number;
+
+	last_alive = 0;
+	player_list = data->player_list;
+	while (player_list)
+	{
+		player = player_list->content;
+		if (player->last_alive > last_alive)
+		{
+			last_alive = player->last_alive;
+			winner = player->prog_name;
+			number = player->n;
+		}
+		player_list = player_list->next;
+	}
+	ft_printf("Contestant %d, \"%s\", has won !\n", number, winner);
 }
 
 void	print_info(t_env *data)

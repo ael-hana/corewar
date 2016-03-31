@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:44:02 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 15:48:44 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 16:56:38 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ unsigned int	recup_val(int code, unsigned char *arena, int *i);
 unsigned int	recup_reg_n(unsigned char *arena, int *i);
 void			print_player_introduction(t_list *player_list);
 int				bytecode_nb(int bytecode);
-
+void			print_winner(t_env *data);
 #endif

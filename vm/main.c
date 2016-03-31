@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 14:55:38 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 17:27:39 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int		main(int ac, char **av)
 	place_players(&data);
 	print_player_introduction(data.player_list);
 	start_game(&data);
-	print_arena(&data);
-	print_info(&data);
+	if (data.visual)
+	{
+		print_arena(&data);
+		print_info(&data);
+	}
+	print_winner(&data);
 	return (0);
 }

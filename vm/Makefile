@@ -3,69 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ecousine <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/11/26 14:18:45 by ecousine          #+#    #+#              #
-#*   Updated: 2016/03/30 16:24:05 by ecousine         ###   ########.fr       *#
+#    Created: 2016/01/14 15:29:40 by tle-meur          #+#    #+#              #
+#*   Updated: 2016/03/31 15:58:24 by ecousine         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
-NAME=vm_corewar
-CC=gcc
-CFLAGS=-Wall -Wextra -Werror
-RM=rm -f
-LDFLAGS=-L.
-LDLIBS=$(LIBFT_PATH)libft.a
-LIBFT_PATH=../libft/
-SRC=	add.c \
-		aff.c \
-		and.c \
-		chech_asm.c \
-		create_arena.c \
-		fork.c \
-		ft_parssing.c \
-		func_get_val.c \
-		game_engine.c \
-		instruction.c \
-		ld.c \
-		ldi.c \
-		lfork.c \
-		live.c \
-		lld.c \
-		lldi.c \
-		main.c \
-		op.c \
-		op_arg.c \
-		or.c \
-		parse_flags.c \
-		parse_players.c \
-		place_players.c \
-		print_arena.c \
-		print_error.c \
-		process.c \
-		st.c \
-		sti.c \
-		str_is_digit.c \
-		sub.c \
-		xor.c \
-		zjmp.c
+NAME	=	corewar
 
-OBJ=$(SRC:.c=.o)
+FLAGS	=	-Wall -Wextra -Werror
 
-$(NAME): $(OBJ)
-	cd $(LIBFT_PATH) && $(MAKE)
-	$(CC) -o ../$(NAME) $(CFLAGS) $(SRC) $(LDLIBS)
+SRCS	=	add.c aff.c and.c chech_asm.c create_arena.c fork.c ft_parssing.c \
+			func_get_val.c game_engine.c instruction.c ld.c ldi.c lfork.c \
+			live.c lld.c lldi.c main.c op.c op_arg.c op_arg2.c or.c \
+			parse_flags.c parse_players.c place_players.c print_arena.c \
+			print_error.c process.c st.c sti.c str_is_digit.c sub.c xor.c zjmp.c
 
-all: $(NAME)
+OBJS	=	$(SRCS:.c=.o)
 
-clean:
-	$(RM) $(OBJ)
-	cd $(LIBFT_PATH) && $(MAKE) $@
+all		:	$(NAME)
 
-fclean: clean
-	$(RM) $(NAME)
-	cd $(LIBFT_PATH) && $(MAKE) $@
+%.o		:	%.c
+			@gcc $(FLAGS) -o $@ -c $< -I includes/ -I ../libft/
 
-re: fclean all
+$(NAME)	:	$(OBJS)
+			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
+clean	:
+			@rm -f $(OBJS)
 
-.PHONY: clean fclean
+fclean	:	clean
+			@rm -f $(NAME)
+
+re		:	fclean $(NAME)
+
+.PHONY	:	all clean fclean re
