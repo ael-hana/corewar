@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 17:13:50 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/31 14:56:23 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:38:46 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ unsigned int		andd(t_env *data, t_process *process)
 
 	arena = data->arena;
 	if ((tab = get_op_args(arena, process)) == NULL)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	reg_dest = tab[2];
 	if (get_dir_value(arena, process, tab) == 0)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	if (get_ind_value(data->arena, process, tab, 1) == 0)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	if (reg_dest >= 1 && reg_dest <= 16)
 	{
 		process->reg[reg_dest - 1] = tab[0] & tab[1];
@@ -36,7 +36,8 @@ unsigned int		andd(t_env *data, t_process *process)
 			process->carry = 0;
 	}
 	else
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	update_pc_pos(data->arena, process);
+	ft_memdel((void **)&tab);
 	return (1);
 }

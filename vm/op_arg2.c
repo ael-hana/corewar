@@ -6,14 +6,15 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 15:47:40 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 15:49:46 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:45:32 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "function.h"
 
-int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc)
+int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc,
+				int **tab)
 {
 	int		bytecode;
 	int		params_nb;
@@ -34,6 +35,7 @@ int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc)
 		bytecode = bytecode << 2;
 		i++;
 	}
+	ft_memdel((void **)tab);
 	return (0);
 }
 

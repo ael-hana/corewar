@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:44:02 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 16:56:38 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:40:50 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 extern t_op		g_op_tab[17];
 
-int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc);
+int				update_pc_pos_on_failure(unsigned char *arena, t_process *pc,
+				int **tab);
 void			update_pc_pos(unsigned char *are, t_process *process);
 void			write_arena(t_env *data, t_process *pc, int pos, int value);
 int				get_dir_value(unsigned char *are, t_process *process, int *tab);

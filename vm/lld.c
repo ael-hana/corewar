@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 03:07:46 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/31 14:58:09 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:44:57 by tle-meur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ unsigned int		lld(t_env *data, t_process *process)
 
 	arena = data->arena;
 	if ((tab = get_op_args(arena, process)) == NULL)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	if (get_ind_value(arena, process, tab, 0) == 0)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	if (get_ind_value(data->arena, process, tab, 1) == 0)
-		return (update_pc_pos_on_failure(arena, process));
+		return (update_pc_pos_on_failure(arena, process, &tab));
 	if (tab[1] >= 1 && tab[1] <= 16)
 	{
 		process->reg[tab[1] - 1] = tab[0];
@@ -34,5 +34,6 @@ unsigned int		lld(t_env *data, t_process *process)
 			process->carry = 0;
 	}
 	update_pc_pos(data->arena, process);
+	ft_memdel((void **)&tab);
 	return (1);
 }
