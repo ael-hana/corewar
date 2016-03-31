@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/12 17:16:08 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 17:27:37 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 18:24:13 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_winner(t_env *data)
 	char		*winner;
 	int			number;
 
-	last_alive = 0;
+	last_alive = -1;
 	player_list = data->player_list;
 	while (player_list)
 	{
