@@ -29,11 +29,15 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
+			@echo "$(NAME) created"
+
 clean	:
 			@rm -f $(OBJS)
+			@echo "$(NAME) objects deleted"
 
 fclean	:	clean
-			@rm -f $(NAME)
+			@rm -f ../$(NAME)
+			@echo "$(NAME) deleted"
 
 re		:	fclean $(NAME)
 
