@@ -41,7 +41,7 @@ unsigned int		recup_dir(unsigned char *arena, int *i)
 
 unsigned int		recup_reg_n(unsigned char *arena, int *i)
 {
-	*i = ++*i % MEM_SIZE;
+	*i = (*i + 1) % MEM_SIZE;
 	return (arena[*i] - 1 >= 0 ? arena[*i] - 1 : 42);
 }
 

@@ -15,12 +15,10 @@ all		:	asm corewar
 asm		:
 			@make -C libft/
 			@make -C compilo/
-			@mv compilo/asm .
 
 corewar	:
 			@make -C libft/
 			@make -C vm/
-			@mv vm/corewar .
 
 clean	:
 			@make -C vm/ clean

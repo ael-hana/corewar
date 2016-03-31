@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	corewar
+NAME	=	../corewar
 
 FLAGS	=	-Wall -Wextra -Werror
 
@@ -30,15 +30,15 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
-			@echo "$(NAME) created"
+			@echo "corewar created"
 
 clean	:
 			@rm -f $(OBJS)
-			@echo "$(NAME) objects deleted"
+			@echo "corewar objects deleted"
 
 fclean	:	clean
-			@rm -f ../$(NAME)
-			@echo "$(NAME) deleted"
+			@rm -f $(NAME)
+			@echo "corewar deleted"
 
 re		:	fclean $(NAME)
 

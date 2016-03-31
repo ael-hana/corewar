@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	asm
+NAME	=	../asm
 
 FLAGS	=	-Wall -Wextra -Werror
 
@@ -30,15 +30,15 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
-			@echo "$(NAME) created"
+			@echo "asm created"
 
 clean	:
 			@rm -f $(OBJS)
-			@echo "$(NAME) objects deleted"
+			@echo "asm objects deleted"
 
 fclean	:	clean
-			@rm -f ../$(NAME)
-			@echo "$(NAME) deleted"
+			@rm -f $(NAME)
+			@echo "asm deleted"
 
 re		:	fclean $(NAME)
 
