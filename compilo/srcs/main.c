@@ -28,10 +28,10 @@ static void	print_instrus(void)
 
 static int	my_help(void)
 {
-	ft_putendl("Usage : ./asm [-at] <sourcefile.s ...>\n");
+	ft_putendl("Usage : ./asm [-ah] <sourcefile.s ...>\n");
 	ft_putendl("\t-a\n\t\tInstead of creating a .cor file, outputs a stripped");
 	ft_putendl("\t\tand annoted version of the code to the standard output\n");
-	ft_putendl("\t-t\n\t\tPrint this help and quit\n");
+	ft_putendl("\t-h\n\t\tPrint this help and quit\n");
 	ft_putendl("Be carreful, the expected syntax is restrictive\n");
 	ft_printf("\tA comment begins by a character in \"%s\"\n\n", COMMENT_CHARS);
 	ft_putendl("\tA name and a comment have to be given before the labels and");
