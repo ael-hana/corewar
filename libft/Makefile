@@ -6,7 +6,7 @@
 #    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 18:11:41 by tle-meur          #+#    #+#              #
-#    Updated: 2016/03/07 14:41:47 by tle-meur         ###   ########.fr        #
+#    Updated: 2016/03/30 16:57:33 by tle-meur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,41 +60,34 @@ SRCS	=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 			ft_btreeadd.c ft_btreedelone.c ft_datatmp.c ft_pgcd.c \
 			ft_fractadd.c ft_fractsub.c ft_fractmul.c \
 			ft_fractdiv.c ft_fractsimplify.c ft_ppcm.c \
-			ft_fractcreate.c ft_printf.c
+			ft_fractcreate.c ft_printf.c ft_tabdel.c ft_sprintf.c \
+			ft_unixcmd_parser.c ft_printf_fd.c
 
-OBJS	=	$(SRCS:.c=.o)
+SRCSWR	=	writes/ft_itoas_bases.c writes/space_chars.c writes/utilities.c \
+			writes/write_doubles.c writes/write_scientist.c writes/write_extra.c
 
-SRCSWR	=	ft_itoas_bases.c space_chars.c utilities.c write_doubles.c \
-			write_scientist.c write_extra.c
+SRCSRD	=	reading/check_arg.c reading/check_cs.c reading/check_dioux.c \
+			reading/check_format.c reading/check_bin.c reading/fill.c
 
-SRCSRD	=	check_arg.c check_cs.c check_dioux.c check_format.c check_bin.c \
-			fill.c
-
-OBJSWR	=	$(SRCSWR:.c=.o)
-
-OBJSRD	=	$(SRCSRD:.c=.o)
-
-OBJS	=	$(SRCS:.c=.o) $(OBJSWR) $(OBJSRD)
+OBJS	=	$(SRCS:.c=.o) $(SRCSWR:.c=.o) $(SRCSRD:.c=.o)
 
 
-all:		$(NAME)
+all		:	$(NAME)
 
-$(NAME):
-		@cd writes/; gcc -c $(FLAGS) $(SRCSWR); mv $(OBJSWR) ../
-		@cd reading/; gcc -c $(FLAGS) $(SRCSRD); mv $(OBJSRD) ../
-		@gcc $(FLAGS) -c $(SRCS)
-		@ar rc $(NAME) $(OBJS)
-		@ranlib $(NAME)
+%.o		:	%.c
+			@gcc $(FLAGS) -o $@ -c $<
 
-clean:
-		@rm -f $(OBJS)
+$(NAME)	:	$(OBJS)
+			@gcc $(FLAGS) -c $(SRCS)
+			@ar rc $(NAME) $(OBJS)
+			@ranlib $(NAME)
 
-fclean:		clean
-		@rm -f $(NAME)
+clean	:
+			@rm -f $(OBJS)
 
-re:			fclean $(NAME)
+fclean	:	clean
+			@rm -f $(NAME)
 
-simple:		re
-		@rm -f $(OBJS)
+re		:	fclean $(NAME)
 
-.PHONY:		all clean fclean re simple
+.PHONY:		all clean fclean re
