@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 17:44:02 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 16:56:38 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:02:36 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ unsigned int	lld(t_env *data, t_process *process);
 unsigned int	lldi(t_env *data, t_process *process);
 unsigned int	lforkk(t_env *data, t_process *process);
 
+void			free_process(void *process, size_t size);
+void			free_player(void *player, size_t size);
 int				get_value(unsigned char *arena, t_process *process, int index);
 int				get_ind_value(unsigned char *a, t_process *p, int *t, int i);
 void			write_hex(int position, unsigned char *arena, int val);

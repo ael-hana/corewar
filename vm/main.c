@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/11 17:10:38 by ecousine          #+#    #+#             */
-/*   Updated: 2016/03/31 17:27:39 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/03/31 19:05:09 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ int		main(int ac, char **av)
 		print_info(&data);
 	}
 	print_winner(&data);
+	ft_lstdel(&data.player_list, &free_player);
+	ft_lstdel(&data.process_list, &free_process);
 	return (0);
 }
