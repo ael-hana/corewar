@@ -6,7 +6,7 @@
 #    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 18:11:41 by tle-meur          #+#    #+#              #
-#    Updated: 2016/03/30 16:57:33 by tle-meur         ###   ########.fr        #
+#    Updated: 2016/03/31 17:38:51 by tle-meur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,12 +81,15 @@ $(NAME)	:	$(OBJS)
 			@gcc $(FLAGS) -c $(SRCS)
 			@ar rc $(NAME) $(OBJS)
 			@ranlib $(NAME)
+			@echo "$(NAME) created"
 
 clean	:
 			@rm -f $(OBJS)
+			@echo "$(NAME) objects deleted"
 
 fclean	:	clean
 			@rm -f $(NAME)
+			@echo "$(NAME) deleted"
 
 re		:	fclean $(NAME)
 
