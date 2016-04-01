@@ -6,11 +6,11 @@
 #    By: tle-meur <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/14 15:29:40 by tle-meur          #+#    #+#              #
-#*   Updated: 2016/03/31 19:05:49 by ecousine         ###   ########.fr       *#
+#*   Updated: 2016/04/01 14:05:03 by ecousine         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	corewar
+NAME	=	../corewar
 
 FLAGS	=	-Wall -Wextra -Werror
 
@@ -30,15 +30,15 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 			@gcc $(FLAGS) -o $@ $^ -L ../libft/ -lft
-			@echo "$(NAME) created"
+			@echo "corewar created"
 
 clean	:
 			@rm -f $(OBJS)
-			@echo "$(NAME) objects deleted"
+			@echo "corewar objects deleted"
 
 fclean	:	clean
-			@rm -f ../$(NAME)
-			@echo "$(NAME) deleted"
+			@rm -f $(NAME)
+			@echo "corewar deleted"
 
 re		:	fclean $(NAME)
 

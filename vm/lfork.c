@@ -6,7 +6,7 @@
 /*   By: ael-hana <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/18 03:34:12 by ael-hana          #+#    #+#             */
-/*   Updated: 2016/03/31 14:57:53 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/04/01 14:16:21 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ unsigned int		lforkk(t_env *data, t_process *process)
 	index = (process->position + index) % MEM_SIZE;
 	new_process = create_process(process, process->player, index);
 	ft_lstadd(&data->process_list, ft_lstnew(new_process, sizeof(t_process)));
+	free(new_process);
 	process->position = (process->position + 4) % MEM_SIZE;
 	return (1);
 }
