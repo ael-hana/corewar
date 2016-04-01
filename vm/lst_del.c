@@ -6,7 +6,7 @@
 /*   By: ecousine <ecousine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 18:55:40 by ecousine          #+#    #+#             */
-/*   Updated: 2016/04/01 14:22:50 by ecousine         ###   ########.fr       */
+/*   Updated: 2016/04/01 14:30:31 by ecousine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void free_player(void *player, size_t size)
 {
 	(void)size;
-	free(((t_header*)(player))->inst);
+	ft_memdel((void**)&(((t_header*)(player))->inst));
 	free(player);
 }
 
